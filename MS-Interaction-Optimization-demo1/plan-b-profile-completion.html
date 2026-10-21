@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · Complete Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive.css" />
+  <link rel="stylesheet" href="css/plan-b-pilates-report.css" />
+  <link rel="stylesheet" href="css/plan-b-auth.css" />
+</head>
+<body data-plan-b-page="profile-completion">
+  <main class="device-shell" aria-label="Plan B profile completion page">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="auth-screen" aria-label="Complete profile">
+
+      <section class="auth-card">
+        <h1 class="auth-title">Complete Profile</h1>
+        <p class="auth-subtitle">Add your basic details to personalize training plans.</p>
+
+        <div class="auth-form">
+          <div class="auth-field">
+            <label for="profileNickname">Nickname</label>
+            <input class="auth-input" id="profileNickname" type="text" placeholder="Enter nickname" />
+          </div>
+
+          <div class="auth-field">
+            <label for="profileGender">Gender</label>
+            <select class="auth-select" id="profileGender">
+              <option value="male" selected>Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="auth-field">
+            <span class="auth-field-group-label" id="birthdayGroupLabel">Birthday</span>
+            <div class="auth-date-row" role="group" aria-labelledby="birthdayGroupLabel">
+              <div class="auth-date-part">
+                <label class="auth-sublabel" for="profileBirthYear">Year</label>
+                <select class="auth-select" id="profileBirthYear" aria-label="Birth year">
+                  <option value="">Year</option>
+                </select>
+              </div>
+              <div class="auth-date-part">
+                <label class="auth-sublabel" for="profileBirthMonth">Month</label>
+                <select class="auth-select" id="profileBirthMonth" aria-label="Birth month">
+                  <option value="">Month</option>
+                  <option value="01">Jan</option>
+                  <option value="02">Feb</option>
+                  <option value="03">Mar</option>
+                  <option value="04">Apr</option>
+                  <option value="05">May</option>
+                  <option value="06">Jun</option>
+                  <option value="07">Jul</option>
+                  <option value="08">Aug</option>
+                  <option value="09">Sep</option>
+                  <option value="10">Oct</option>
+                  <option value="11">Nov</option>
+                  <option value="12">Dec</option>
+                </select>
+              </div>
+              <div class="auth-date-part">
+                <label class="auth-sublabel" for="profileBirthDay">Day</label>
+                <select class="auth-select" id="profileBirthDay" aria-label="Birth day">
+                  <option value="">Day</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="auth-field">
+            <label for="profileHeight">Height</label>
+            <div class="auth-unit-toggle" data-unit-toggle data-unit-target="profileHeight">
+              <button class="auth-unit-btn active" data-unit-value="metric" data-unit-placeholder="Height (cm)" type="button">cm</button>
+              <button class="auth-unit-btn" data-unit-value="imperial" data-unit-placeholder="Height (ft)" type="button">ft</button>
+            </div>
+            <input class="auth-input" id="profileHeight" type="number" placeholder="Height (cm)" />
+          </div>
+
+          <div class="auth-field">
+            <label for="profileWeight">Weight</label>
+            <div class="auth-unit-toggle" data-unit-toggle data-unit-target="profileWeight">
+              <button class="auth-unit-btn active" data-unit-value="metric" data-unit-placeholder="Weight (kg)" type="button">kg</button>
+              <button class="auth-unit-btn" data-unit-value="imperial" data-unit-placeholder="Weight (lbs)" type="button">lbs</button>
+            </div>
+            <input class="auth-input" id="profileWeight" type="number" placeholder="Weight (kg)" />
+          </div>
+
+          <button class="auth-primary-btn" id="profileCompletionSaveBtn" type="button">Save</button>
+        </div>
+      </section>
+      <div class="action-dock" aria-label="Page actions">
+        <button class="action-dock-back-btn auth-back-btn" data-auth-back="plan-b-register.html" type="button" aria-label="Back">Back</button>
+      </div>
+    </section>
+
+    <div class="auth-toast is-hidden" id="authToast" aria-live="polite"></div>
+  </main>
+
+  <script src="js/plan-b-auth.js" defer></script>
+</body>
+</html>

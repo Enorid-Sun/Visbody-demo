@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · All Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive.css" />
+  <link rel="stylesheet" href="css/plan-b-pilates-report.css" />
+  <link rel="stylesheet" href="css/plan-b-all-training.css" />
+</head>
+<body data-plan-b-page="all-training">
+  <main class="device-shell" aria-label="Plan B All Training">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="content all-training-screen" id="allTrainingScreen" aria-label="All Training">
+      <div class="all-training-app">
+        <header class="all-training-header">
+          <p class="all-training-kicker">Training Library</p>
+          <h1>All Training</h1>
+          <p class="all-training-subtitle">Browse every move, AI move, and plan in one place.</p>
+        </header>
+
+        <div class="all-training-tabs-row">
+          <div class="all-training-tabs" role="tablist" aria-label="All training categories">
+            <button class="all-training-tab is-active" type="button" role="tab" aria-selected="true" data-tab="moves">Moves</button>
+            <button class="all-training-tab" type="button" role="tab" aria-selected="false" data-tab="aiMoves">AI Moves</button>
+            <button class="all-training-tab" type="button" role="tab" aria-selected="false" data-tab="plans">Plans</button>
+          </div>
+          <div class="at-view-toggle" role="group" aria-label="View mode">
+            <button class="at-view-btn is-active" type="button" data-view="list" aria-pressed="true">List</button>
+            <button class="at-view-btn" type="button" data-view="waterfall" aria-pressed="false">Waterfall</button>
+          </div>
+        </div>
+
+        <section class="all-training-tools" aria-label="Search and filter">
+          <div class="all-training-tools-row">
+            <label class="all-training-search" for="allTrainingSearchInput">
+              <span class="sr-only">Search by name</span>
+              <input id="allTrainingSearchInput" type="search" placeholder="Search by name" autocomplete="off" />
+            </label>
+            <button class="all-training-filter-toggle" id="allTrainingFilterToggle" type="button" aria-expanded="false" aria-controls="allTrainingFilterCollapse" aria-label="Expand filters">
+              <svg class="all-training-filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+              <span class="sr-only">Toggle filters</span>
+            </button>
+          </div>
+          <div class="all-training-filter-collapse" id="allTrainingFilterCollapse" aria-hidden="true">
+            <div class="all-training-filter-collapse-inner">
+              <div class="all-training-filter-panel" id="allTrainingFilterPanel"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="all-training-results" aria-label="Training list">
+          <div class="all-training-results-head">
+            <strong id="allTrainingResultTitle">Moves</strong>
+            <span id="allTrainingResultCount">0 items</span>
+          </div>
+          <div class="all-training-list" id="allTrainingList" data-view="list">
+            <div class="all-training-list-inner" id="allTrainingListInner"></div>
+          </div>
+          <p class="all-training-empty" id="allTrainingEmpty" hidden>No items match your current filters.</p>
+        </section>
+      </div>
+    </section>
+
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <button class="nav-item" id="homeTabBtn" type="button" aria-label="Home">
+        <span class="nav-item-inner">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </span>
+      </button>
+      <button class="nav-item active" id="allTrainingNavBtn" type="button" aria-label="All Training">
+        <span class="nav-item-inner">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+          <span>All Training</span>
+        </span>
+      </button>
+      <button class="nav-item" id="profileTabBtn" type="button" aria-label="Profile">
+        <span class="nav-item-inner">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile</span>
+        </span>
+      </button>
+    </nav>
+  </main>
+  <script src="js/data/explore-library.js"></script>
+  <script src="js/plan-b-verify.js" defer></script>
+  <script src="js/plan-b-all-training.js" defer></script>
+  <script>
+    window.__DEV_BACKUP__ = { apiOrigin: 'http://127.0.0.1:37547' };
+  </script>
+  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+</body>
+</html>

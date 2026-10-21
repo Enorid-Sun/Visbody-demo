@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>力量训练 · 自由训练</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-0: #03070f;
+      --bg-1: #07111e;
+      --bg-2: #0b1a2a;
+      --text: #edf4ff;
+      --muted: rgba(201, 218, 238, 0.58);
+      --cyan-0: #5eeaff;
+      --cyan-1: #7cb2ff;
+      --amber-0: #ffae63;
+      --amber-1: #ff7c46;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; }
+
+    body {
+      font-family: "Barlow", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 16% 10%, rgba(94, 234, 255, 0.15), transparent 38%),
+        radial-gradient(circle at 84% 18%, rgba(255, 174, 99, 0.14), transparent 42%),
+        linear-gradient(135deg, var(--bg-0) 0%, var(--bg-1) 58%, var(--bg-2) 100%);
+      overflow: auto;
+    }
+
+    #screenWrap {
+      position: relative;
+      min-height: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    #screenWrap.flipped {
+      transform: rotate(180deg);
+      transition: transform 480ms ease;
+    }
+
+    /* Status bar */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px 4px;
+      font-size: 0.78rem;
+      color: rgba(220, 235, 255, 0.72);
+      letter-spacing: 0.04em;
+    }
+
+    .status-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-bar-icons {
+      display: flex;
+      gap: 6px;
+      opacity: 0.7;
+    }
+
+    /* Page header */
+    .page-header {
+      padding: 8px 20px 16px;
+    }
+
+    .page-header h1 {
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    /* Main scroll area */
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 0 16px 100px;
+    }
+
+    .panel {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+        linear-gradient(180deg, rgba(8, 16, 28, 0.86), rgba(7, 14, 24, 0.8));
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: -30% -10% auto -20%;
+      height: 55%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.06), transparent 70%);
+      pointer-events: none;
+    }
+
+    .panel-title {
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Core metrics */
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .metric {
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+        radial-gradient(circle at 10% 0, rgba(94, 234, 255, 0.08), transparent 45%);
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .metric label {
+      display: block;
+      color: rgba(198, 214, 233, 0.56);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .metric strong {
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 2.2rem;
+      line-height: 0.95;
+      font-weight: 800;
+      display: inline-flex;
+      gap: 4px;
+      align-items: baseline;
+    }
+
+    .metric strong small {
+      font-size: 0.85rem;
+      color: rgba(192, 211, 235, 0.66);
+      font-family: "Barlow", sans-serif;
+      font-weight: 600;
+    }
+
+    /* Config */
+    .config-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .config-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .config-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      min-width: 64px;
+      flex-shrink: 0;
+    }
+
+    .seg-group {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.25);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+      gap: 3px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .seg-btn {
+      border: none;
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: rgba(220, 235, 255, 0.7);
+      background: transparent;
+      cursor: pointer;
+      transition: all 200ms ease;
+      flex: 1;
+      white-space: nowrap;
+    }
+
+    .seg-btn:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .seg-btn.active {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(94, 234, 255, 0.35), rgba(124, 178, 255, 0.3));
+      box-shadow: 0 0 12px rgba(94, 234, 255, 0.22);
+    }
+
+    .seg-btn.side-left.active {
+      background: linear-gradient(135deg, rgba(94, 234, 255, 0.4), rgba(124, 178, 255, 0.35));
+    }
+
+    .seg-btn.side-right.active {
+      background: linear-gradient(135deg, rgba(255, 174, 99, 0.45), rgba(255, 124, 70, 0.35));
+      box-shadow: 0 0 12px rgba(255, 174, 99, 0.25);
+    }
+
+    .config-row.is-hidden {
+      display: none;
+    }
+
+    /* Resistance dial */
+    .resistance-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+      padding: 8px 0;
+    }
+
+    .side-badge {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      background: rgba(94, 234, 255, 0.15);
+      color: var(--cyan-0);
+      border: 1px solid rgba(94, 234, 255, 0.3);
+    }
+
+    .side-badge.is-visible { display: inline-flex; }
+    .side-badge.side-right {
+      background: rgba(255, 174, 99, 0.15);
+      color: var(--amber-0);
+      border-color: rgba(255, 174, 99, 0.35);
+    }
+
+    .resistance-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .resistance-control button {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      background: linear-gradient(145deg, #1C1C1E, #0A0A0C);
+      color: #cbd5e1;
+      font-size: 22px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4),
+                  -2px -2px 8px rgba(255, 255, 255, 0.05);
+      display: grid;
+      place-items: center;
+    }
+
+    .resistance-control button:hover {
+      border-color: rgba(0, 212, 255, 0.4);
+      color: #00D4FF;
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+    }
+
+    .resistance-control button:active {
+      transform: scale(0.95);
+    }
+
+    .iw-dial-container {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #2A2A2E 0%, #0A0A0C 80%);
+      box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.08),
+                  inset -3px -3px 8px rgba(0, 0, 0, 0.8),
+                  0 0 20px rgba(0, 212, 255, 0.2),
+                  0 8px 24px rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .iw-dial-container::before {
+      content: '';
+      position: absolute;
+      top: -6px; left: -6px; right: -6px; bottom: -6px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(0,212,255,0.2), rgba(0,122,255,0.5), rgba(0,212,255,0.2));
+      z-index: -1;
+      filter: blur(10px);
+      animation: dialGlow 4s linear infinite;
+    }
+
+    @keyframes dialGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .iw-dial-svg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      transform: rotate(-90deg);
+      pointer-events: none;
+    }
+
+    .iw-dial-ticks {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.15);
+      stroke-width: 2;
+      stroke-dasharray: 2 6;
+    }
+
+    .iw-dial-track {
+      fill: none;
+      stroke: #1C1C1E;
+      stroke-width: 6;
+    }
+
+    .iw-dial-progress {
+      fill: none;
+      stroke: url(#iwDialGrad);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 213.63;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.5));
+    }
+
+    .iw-dial-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1C1C1E 0%, #0A0A0C 100%);
+      box-shadow: inset 1px 1px 2px rgba(255,255,255,0.1),
+                  0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .iw-dial-value {
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+
+    .iw-dial-unit {
+      color: #00D4FF;
+      font-size: 10px;
+      font-weight: 600;
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .step-note {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* Coefficient slider */
+    .slider-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+      padding-top: 4px;
+    }
+
+    .slider-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slider-head span:first-child {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .slider-head strong {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .slider-block input[type="range"] {
+      width: 100%;
+      height: 10px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 999px;
+      outline: none;
+    }
+
+    .slider-block input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan-0), var(--cyan-1));
+      box-shadow: 0 0 14px rgba(94, 234, 255, 0.5);
+      cursor: pointer;
+    }
+
+    .slider-hint {
+      font-size: 0.68rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* Chart panel */
+    .chart-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chart-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chart-panel-header .panel-title {
+      margin-bottom: 0;
+    }
+
+    .chart-avg {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .chart-avg strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .chart-tabs-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chart-tabs {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      gap: 3px;
+    }
+
+    .chart-tab {
+      border: none;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(220, 235, 255, 0.65);
+      background: transparent;
+      cursor: pointer;
+      transition: all 180ms ease;
+    }
+
+    .chart-tab.active {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(255, 174, 99, 0.5), rgba(255, 124, 70, 0.4));
+    }
+
+    .chart-tab[data-tab="rom"].active {
+      background: linear-gradient(135deg, rgba(94, 234, 255, 0.4), rgba(124, 178, 255, 0.35));
+    }
+
+    .chart-legend {
+      display: flex;
+      gap: 14px;
+      font-size: 0.72rem;
+      color: rgba(220, 235, 255, 0.7);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 14px;
+      height: 4px;
+      border-radius: 2px;
+    }
+
+    .legend-dot.left {
+      background: linear-gradient(90deg, #5eeaff, #7cb2ff);
+      box-shadow: 0 0 6px rgba(94, 234, 255, 0.6);
+    }
+
+    .legend-dot.right {
+      background: linear-gradient(90deg, #ffae63, #ff7c46);
+      box-shadow: 0 0 6px rgba(255, 174, 99, 0.6);
+    }
+
+    .chart-wrap {
+      position: relative;
+      height: 180px;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 14% 20%, rgba(94, 234, 255, 0.1), transparent 42%),
+        radial-gradient(circle at 84% 30%, rgba(255, 174, 99, 0.1), transparent 48%),
+        linear-gradient(180deg, rgba(8, 14, 24, 0.86), rgba(7, 12, 22, 0.95));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+    }
+
+    #romPowerCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Bottom action bar */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 720px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 12px 16px 20px;
+      background: linear-gradient(180deg, transparent, rgba(3, 7, 15, 0.92) 30%);
+      z-index: 50;
+    }
+
+    .bottom-bar button {
+      border: none;
+      border-radius: 14px;
+      min-height: 48px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: transform 180ms ease, filter 180ms ease;
+      color: #f4f8ff;
+    }
+
+    .bottom-bar button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.07);
+    }
+
+    .btn-flip {
+      background: rgba(148, 163, 184, 0.2);
+      color: rgba(237, 244, 255, 0.9);
+    }
+
+    .btn-end {
+      background: linear-gradient(120deg, rgba(250, 145, 100, 0.95), rgba(221, 86, 98, 0.95));
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.24);
+    }
+
+    .btn-start {
+      background: linear-gradient(120deg, rgba(255, 140, 50, 0.95), rgba(255, 100, 30, 0.95));
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.24), 0 0 20px rgba(255, 140, 50, 0.3);
+    }
+
+    .btn-start:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="screenWrap">
+    <div class="status-bar">
+      <div class="status-bar-left">
+        <span id="statusTime">10:54</span>
+        <span id="statusDate">2026.6.15</span>
+      </div>
+      <div class="status-bar-icons" aria-hidden="true">
+        <span>Wi‑Fi</span>
+        <span>●</span>
+      </div>
+    </div>
+
+    <header class="page-header">
+      <h1>力量训练</h1>
+    </header>
+
+    <div class="dashboard" id="dashboard">
+      <!-- Core metrics -->
+      <article class="panel">
+        <h2 class="panel-title">核心指标</h2>
+        <div class="metrics">
+          <div class="metric">
+            <label>时长</label>
+            <strong id="durationValue">00:00</strong>
+          </div>
+          <div class="metric">
+            <label>总阻力</label>
+            <strong><span id="resistanceValue">16.0</span><small>kg</small></strong>
+          </div>
+          <div class="metric">
+            <label>输出能量</label>
+            <strong><span id="energyValue">0</span><small>kJ</small></strong>
+          </div>
+          <div class="metric">
+            <label>卡路里</label>
+            <strong><span id="calorieValue">0</span><small>kcal</small></strong>
+          </div>
+        </div>
+      </article>
+
+      <!-- Chart (upper half — display / feedback) -->
+      <article class="panel chart-panel">
+        <div class="chart-panel-header">
+          <h2 class="panel-title">动作幅度与功率</h2>
+          <div class="chart-avg">平均 <strong id="chartAvgValue">8.8</strong></div>
+        </div>
+        <div class="chart-tabs-row">
+          <div class="chart-tabs" id="chartTabs" role="group" aria-label="图表类型">
+            <button type="button" class="chart-tab active" data-tab="rom">幅度</button>
+            <button type="button" class="chart-tab" data-tab="power">功率</button>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <span class="legend-dot left"></span>
+              <span>L</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot right"></span>
+              <span>R</span>
+            </div>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="romPowerCanvas" aria-label="实时幅度与功率图表"></canvas>
+        </div>
+      </article>
+
+      <!-- Training config (lower half — controls) -->
+      <article class="panel config-layout">
+        <h2 class="panel-title">训练配置</h2>
+
+        <div class="config-row">
+          <span class="config-label">重量模式</span>
+          <div class="seg-group" id="modeGroup" role="group" aria-label="重量模式">
+            <button type="button" class="seg-btn" data-mode="standard">标准</button>
+            <button type="button" class="seg-btn active" data-mode="spring">弹簧</button>
+            <button type="button" class="seg-btn" data-mode="eccentric">离心</button>
+            <button type="button" class="seg-btn" data-mode="isokinetic">等速</button>
+          </div>
+        </div>
+
+        <div class="config-row">
+          <span class="config-label">结构</span>
+          <div class="seg-group" id="structureGroup" role="group" aria-label="结构模式">
+            <button type="button" class="seg-btn active" data-structure="barbell">杠铃</button>
+            <button type="button" class="seg-btn" data-structure="nonbarbell">非杠铃</button>
+          </div>
+        </div>
+
+        <div class="config-row is-hidden" id="motorRow">
+          <span class="config-label">电机</span>
+          <div class="seg-group" id="motorGroup" role="group" aria-label="电机选择">
+            <button type="button" class="seg-btn side-left active" data-side="left">左 L</button>
+            <button type="button" class="seg-btn side-right" data-side="right">右 R</button>
+          </div>
+        </div>
+
+        <div class="resistance-block">
+          <div class="side-badge" id="sideBadge">左 L</div>
+          <div class="resistance-control">
+            <button type="button" id="resistanceMinus" aria-label="减少阻力">−</button>
+            <div class="iw-dial-container">
+              <svg class="iw-dial-svg" viewBox="0 0 120 120">
+                <defs>
+                  <linearGradient id="iwDialGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00D4FF"/>
+                    <stop offset="100%" stop-color="#007AFF"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="60" cy="60" r="54" class="iw-dial-ticks"></circle>
+                <circle cx="60" cy="60" r="40" class="iw-dial-track"></circle>
+                <circle cx="60" cy="60" r="40" class="iw-dial-progress" id="iwDialProgress"></circle>
+              </svg>
+              <div class="iw-dial-content">
+                <div class="iw-dial-value" id="resistanceDisplayVal">16.0</div>
+                <div class="iw-dial-unit">kg</div>
+              </div>
+            </div>
+            <button type="button" id="resistancePlus" aria-label="增加阻力">+</button>
+          </div>
+          <div class="step-note" id="stepNote">步进：1 kg</div>
+        </div>
+
+        <div class="slider-block" id="coeffSliderBlock">
+          <div class="slider-head">
+            <span>系数档位</span>
+            <strong id="coeffSliderLabel">档位 8</strong>
+          </div>
+          <input type="range" id="coeffSlider" min="1" max="10" step="1" value="8" aria-label="系数档位">
+          <span class="slider-hint">档位越高，反馈越早。</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="bottom-bar" aria-label="训练操作">
+      <button type="button" class="btn-flip" id="flipBtn">屏幕翻转</button>
+      <button type="button" class="btn-end" id="endBtn">结束训练</button>
+      <button type="button" class="btn-start" id="startBtn">开始训练</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const durationValue = document.getElementById("durationValue");
+      const resistanceValue = document.getElementById("resistanceValue");
+      const energyValue = document.getElementById("energyValue");
+      const calorieValue = document.getElementById("calorieValue");
+      const resistanceDisplayVal = document.getElementById("resistanceDisplayVal");
+      const iwDialProgress = document.getElementById("iwDialProgress");
+      const resistanceMinus = document.getElementById("resistanceMinus");
+      const resistancePlus = document.getElementById("resistancePlus");
+      const stepNote = document.getElementById("stepNote");
+      const motorRow = document.getElementById("motorRow");
+      const sideBadge = document.getElementById("sideBadge");
+      const modeBtns = document.querySelectorAll("#modeGroup .seg-btn");
+      const structureBtns = document.querySelectorAll("#structureGroup .seg-btn");
+      const motorBtns = document.querySelectorAll("#motorGroup .seg-btn");
+      const chartTabs = document.querySelectorAll("#chartTabs .chart-tab");
+      const chartAvgValue = document.getElementById("chartAvgValue");
+      const coeffSlider = document.getElementById("coeffSlider");
+      const coeffSliderLabel = document.getElementById("coeffSliderLabel");
+      const flipBtn = document.getElementById("flipBtn");
+      const startBtn = document.getElementById("startBtn");
+      const endBtn = document.getElementById("endBtn");
+      const canvas = document.getElementById("romPowerCanvas");
+      const ctx = canvas.getContext("2d");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const BARBELL_STEP = 1;
+      const NONBARBELL_STEP = 0.5;
+      const RESISTANCE_MIN_BARBELL = 1;
+      const RESISTANCE_MIN_NONBARBELL = 0.5;
+      const RESISTANCE_MAX = 100;
+      const KCAL_TO_KJ = 4.184;
+      const DASHARRAY = 213.63;
+
+      let trainingMode = "spring";
+      let structureMode = "barbell";
+      let activeSide = "left";
+      let resistanceBarbell = 16;
+      let resistanceLeft = 8;
+      let resistanceRight = 8;
+      let coeffLevel = 8;
+      let chartTab = "rom";
+      let elapsedSeconds = 0;
+      let calories = 0;
+      let isRunning = false;
+      let timerId = null;
+      let frameId = null;
+      let chartTick = 0;
+      let dpr = 1;
+
+      function getResistanceStep() {
+        return structureMode === "barbell" ? BARBELL_STEP : NONBARBELL_STEP;
+      }
+
+      function getResistanceMin() {
+        return structureMode === "barbell" ? RESISTANCE_MIN_BARBELL : RESISTANCE_MIN_NONBARBELL;
+      }
+
+      function normalizeResistance(val) {
+        if (structureMode === "barbell") return Math.round(val);
+        return Math.round(val * 10) / 10;
+      }
+
+      function formatResistance(val) {
+        if (structureMode === "barbell") return normalizeResistance(val).toFixed(0);
+        return normalizeResistance(val).toFixed(1);
+      }
+
+      function updateStepUI() {
+        var step = getResistanceStep();
+        var label = step === 1 ? "1" : "0.5";
+        if (stepNote) stepNote.textContent = "步进：" + label + " kg";
+        resistanceMinus.setAttribute("aria-label", "减少 " + label + " kg");
+        resistancePlus.setAttribute("aria-label", "增加 " + label + " kg");
+      }
+
+      function formatDuration(totalSeconds) {
+        const min = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+        const sec = String(totalSeconds % 60).padStart(2, "0");
+        return min + ":" + sec;
+      }
+
+      function getActiveResistance() {
+        if (structureMode === "barbell") return resistanceBarbell;
+        return activeSide === "left" ? resistanceLeft : resistanceRight;
+      }
+
+      function setActiveResistance(val) {
+        if (structureMode === "barbell") {
+          resistanceBarbell = val;
+        } else if (activeSide === "left") {
+          resistanceLeft = val;
+        } else {
+          resistanceRight = val;
+        }
+      }
+
+      function getTotalResistance() {
+        if (structureMode === "barbell") return resistanceBarbell;
+        return resistanceLeft + resistanceRight;
+      }
+
+      function updateResistanceUI() {
+        const active = getActiveResistance();
+        resistanceDisplayVal.textContent = formatResistance(active);
+        const percent = (active - getResistanceMin()) / (RESISTANCE_MAX - getResistanceMin());
+        iwDialProgress.style.strokeDashoffset = DASHARRAY - (DASHARRAY * Math.max(0, Math.min(1, percent)));
+        resistanceValue.textContent = getTotalResistance().toFixed(1);
+      }
+
+      function updateStructureUI() {
+        const isNonBarbell = structureMode === "nonbarbell";
+        motorRow.classList.toggle("is-hidden", !isNonBarbell);
+        sideBadge.classList.toggle("is-visible", isNonBarbell);
+        if (isNonBarbell) {
+          sideBadge.textContent = activeSide === "left" ? "左 L" : "右 R";
+          sideBadge.classList.toggle("side-right", activeSide === "right");
+        }
+        updateStepUI();
+        updateResistanceUI();
+      }
+
+      function setTrainingMode(mode) {
+        trainingMode = mode;
+        modeBtns.forEach(function (btn) {
+          btn.classList.toggle("active", btn.dataset.mode === mode);
+        });
+      }
+
+      function setStructureMode(mode) {
+        structureMode = mode;
+        structureBtns.forEach(function (btn) {
+          btn.classList.toggle("active", btn.dataset.structure === mode);
+        });
+        updateStructureUI();
+      }
+
+      function setActiveSide(side) {
+        activeSide = side;
+        motorBtns.forEach(function (btn) {
+          btn.classList.toggle("active", btn.dataset.side === side);
+        });
+        updateStructureUI();
+      }
+
+      function setChartTab(tab) {
+        chartTab = tab;
+        chartTabs.forEach(function (btn) {
+          btn.classList.toggle("active", btn.dataset.tab === tab);
+        });
+      }
+
+      modeBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () { setTrainingMode(btn.dataset.mode); });
+      });
+
+      structureBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () { setStructureMode(btn.dataset.structure); });
+      });
+
+      motorBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () { setActiveSide(btn.dataset.side); });
+      });
+
+      chartTabs.forEach(function (btn) {
+        btn.addEventListener("click", function () { setChartTab(btn.dataset.tab); });
+      });
+
+      resistanceMinus.addEventListener("click", function () {
+        var val = getActiveResistance();
+        var min = getResistanceMin();
+        var step = getResistanceStep();
+        if (val > min) {
+          val = Math.max(min, val - step);
+          setActiveResistance(normalizeResistance(val));
+          updateResistanceUI();
+        }
+      });
+
+      resistancePlus.addEventListener("click", function () {
+        var val = getActiveResistance();
+        var step = getResistanceStep();
+        if (val < RESISTANCE_MAX) {
+          val = Math.min(RESISTANCE_MAX, val + step);
+          setActiveResistance(normalizeResistance(val));
+          updateResistanceUI();
+        }
+      });
+
+      coeffSlider.addEventListener("input", function () {
+        coeffLevel = parseInt(coeffSlider.value, 10);
+        coeffSliderLabel.textContent = "档位 " + coeffLevel;
+      });
+
+      flipBtn.addEventListener("click", function () {
+        document.getElementById("screenWrap").classList.toggle("flipped");
+      });
+
+      function resizeCanvas() {
+        dpr = window.devicePixelRatio || 1;
+        var rect = canvas.getBoundingClientRect();
+        var w = Math.max(1, Math.floor(rect.width)) || 640;
+        var h = Math.max(1, Math.floor(rect.height)) || 180;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        if (reducedMotion) drawChart();
+      }
+
+      function drawWave(ctx, width, height, baseY, amp, waveLen, phaseOffset, gradient, shadowColor) {
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = gradient;
+        ctx.shadowBlur = 18;
+        ctx.shadowColor = shadowColor;
+        ctx.beginPath();
+        for (var x = 0; x <= width; x += 6) {
+          var y = baseY - Math.sin((x + chartTick * 10 + phaseOffset) / waveLen) * amp;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      }
+
+      function drawChart() {
+        var width = canvas.width / dpr;
+        var height = canvas.height / dpr;
+        if (width < 2 || height < 2) {
+          if (!reducedMotion) frameId = requestAnimationFrame(drawChart);
+          return;
+        }
+
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.strokeStyle = "rgba(148,163,184,0.22)";
+        ctx.lineWidth = 1;
+        var rowGap = height / 4;
+        for (var i = 1; i <= 3; i += 1) {
+          ctx.beginPath();
+          ctx.moveTo(0, i * rowGap);
+          ctx.lineTo(width, i * rowGap);
+          ctx.stroke();
+        }
+
+        var baseY = height * 0.55;
+        var waveLen = width / 3.5;
+        var isNonBarbell = structureMode === "nonbarbell";
+        var leftAmp = height * 0.22 * (resistanceLeft / 20);
+        var rightAmp = height * 0.22 * (resistanceRight / 20);
+        var barbellAmp = height * 0.24 * (resistanceBarbell / 20);
+
+        if (isNonBarbell) {
+          var leftGrad = ctx.createLinearGradient(0, 0, width, 0);
+          leftGrad.addColorStop(0, "rgba(94, 234, 255, 0.96)");
+          leftGrad.addColorStop(1, "rgba(104, 163, 255, 0.92)");
+          var rightGrad = ctx.createLinearGradient(0, 0, width, 0);
+          rightGrad.addColorStop(0, "rgba(255, 188, 123, 0.94)");
+          rightGrad.addColorStop(1, "rgba(255, 124, 70, 0.92)");
+
+          if (chartTab === "rom") {
+            drawWave(ctx, width, height, baseY, leftAmp, waveLen, 0, leftGrad, "rgba(102, 220, 255, 0.78)");
+            drawWave(ctx, width, height, baseY, rightAmp, waveLen, 60, rightGrad, "rgba(255, 156, 90, 0.76)");
+          } else {
+            drawWave(ctx, width, height, baseY, leftAmp * 0.9, waveLen, 30, leftGrad, "rgba(102, 220, 255, 0.78)");
+            drawWave(ctx, width, height, baseY, rightAmp * 0.9, waveLen, 90, rightGrad, "rgba(255, 156, 90, 0.76)");
+          }
+
+          var avgVal = ((leftAmp + rightAmp) / (height * 0.22) * 10).toFixed(1);
+          chartAvgValue.textContent = avgVal;
+        } else {
+          var grad = ctx.createLinearGradient(0, 0, width, 0);
+          if (chartTab === "rom") {
+            grad.addColorStop(0, "rgba(94, 234, 255, 0.96)");
+            grad.addColorStop(1, "rgba(104, 163, 255, 0.92)");
+          } else {
+            grad.addColorStop(0, "rgba(255, 188, 123, 0.94)");
+            grad.addColorStop(1, "rgba(255, 124, 70, 0.92)");
+          }
+          drawWave(ctx, width, height, baseY, barbellAmp, waveLen, 0, grad,
+            chartTab === "rom" ? "rgba(102, 220, 255, 0.78)" : "rgba(255, 156, 90, 0.76)");
+          drawWave(ctx, width, height, baseY, barbellAmp, waveLen, 0, grad,
+            chartTab === "rom" ? "rgba(102, 220, 255, 0.78)" : "rgba(255, 156, 90, 0.76)");
+          chartAvgValue.textContent = (barbellAmp / (height * 0.22) * 10).toFixed(1);
+        }
+
+        chartTick += 1;
+        if (!reducedMotion) frameId = requestAnimationFrame(drawChart);
+      }
+
+      function tickTraining() {
+        if (!isRunning) return;
+        elapsedSeconds += 1;
+        var totalR = getTotalResistance();
+        var energyStep = totalR * (0.42 + Math.random() * 0.3);
+        calories += energyStep * 0.24;
+        energyValue.textContent = (calories * KCAL_TO_KJ).toFixed(1);
+        calorieValue.textContent = Math.round(calories);
+        durationValue.textContent = formatDuration(elapsedSeconds);
+      }
+
+      function startTraining() {
+        if (isRunning) return;
+        isRunning = true;
+        startBtn.disabled = true;
+        timerId = setInterval(tickTraining, 1000);
+      }
+
+      function endTraining() {
+        isRunning = false;
+        if (timerId) clearInterval(timerId);
+        timerId = null;
+        startBtn.disabled = false;
+        if (window.history.length > 1) window.history.back();
+        else window.location.href = "index-plan-b-home.html";
+      }
+
+      startBtn.addEventListener("click", startTraining);
+      endBtn.addEventListener("click", endTraining);
+
+      updateStructureUI();
+      window.addEventListener("resize", resizeCanvas);
+      window.addEventListener("beforeunload", function () {
+        if (timerId) clearInterval(timerId);
+        if (frameId) cancelAnimationFrame(frameId);
+      });
+      resizeCanvas();
+      setTimeout(resizeCanvas, 80);
+      if (reducedMotion) drawChart();
+      else frameId = requestAnimationFrame(drawChart);
+
+      var now = new Date();
+      document.getElementById("statusTime").textContent =
+        String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
+      document.getElementById("statusDate").textContent =
+        now.getFullYear() + "." + (now.getMonth() + 1) + "." + now.getDate();
+    })();
+  </script>
+  <script>
+    (function () {
+      var p = new URLSearchParams(window.location.search);
+      var t = p.get("type");
+      if (t === "resistance_cardio") {
+        document.title = "阻力有氧 · 自由训练";
+        var h1 = document.querySelector(".page-header h1");
+        if (h1) h1.textContent = "阻力有氧";
+      } else if (t === "cardio" || t === "bodyweight_cardio") {
+        document.title = "自重有氧 · 自由训练";
+        var h1b = document.querySelector(".page-header h1");
+        if (h1b) h1b.textContent = "自重有氧";
+      }
+    })();
+  </script>
+  <script>
+    window.__DEV_BACKUP__ = { apiOrigin: "http://127.0.0.1:37547" };
+  </script>
+  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive.css" />
+  <link rel="stylesheet" href="css/plan-b-pilates-report.css" />
+  <link rel="stylesheet" href="css/plan-b-auth.css" />
+</head>
+<body data-plan-b-page="login">
+  <main class="device-shell" aria-label="Plan B login page">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="auth-screen" aria-label="Login">
+
+      <section class="auth-card">
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle">Continue your progress with Plan B.</p>
+
+        <button class="quick-login-card" id="quickLoginBtn" type="button" aria-label="Quick login with last account">
+          <div class="quick-login-avatar" data-user-avatar>A</div>
+          <div class="quick-login-meta">
+            <strong data-user-name>Alyona</strong>
+            <span>Tap to quick login</span>
+          </div>
+        </button>
+
+        <div class="auth-separator">Or continue with account</div>
+
+        <div class="auth-method-tabs" role="tablist" aria-label="Login method">
+          <button class="auth-method-tab active" data-auth-method-tab="password" type="button" role="tab" aria-selected="true">Email + Password</button>
+          <button class="auth-method-tab" data-auth-method-tab="code" type="button" role="tab" aria-selected="false">Email + Code</button>
+          <button class="auth-method-tab" data-auth-method-tab="qr" type="button" role="tab" aria-selected="false">Scan QR Code</button>
+        </div>
+
+        <div class="auth-form" data-auth-method-panel="password">
+          <div class="auth-field">
+            <label for="loginEmailPassword">Email</label>
+            <input class="auth-input" id="loginEmailPassword" type="email" placeholder="name@email.com" />
+          </div>
+          <div class="auth-field">
+            <label for="loginPassword">Password</label>
+            <input class="auth-input" id="loginPassword" type="password" placeholder="Enter your password" />
+          </div>
+          <button class="auth-primary-btn" id="loginPasswordBtn" type="button">Login</button>
+        </div>
+
+        <div class="auth-form is-hidden" data-auth-method-panel="code">
+          <div class="auth-field">
+            <label for="loginEmailCode">Email</label>
+            <input class="auth-input" id="loginEmailCode" type="email" placeholder="name@email.com" />
+          </div>
+          <div class="auth-field">
+            <label for="loginCode">Verification Code</label>
+            <div class="auth-input-row">
+              <input class="auth-input" id="loginCode" type="text" placeholder="6-digit code" />
+              <button class="auth-secondary-btn" type="button">Send Code</button>
+            </div>
+          </div>
+          <button class="auth-primary-btn" id="loginCodeBtn" type="button">Login</button>
+        </div>
+
+        <div class="auth-form is-hidden" data-auth-method-panel="qr" id="qrLoginPanel">
+          <div class="qr-login-panel" aria-label="Scan QR code to login">
+            <div class="qr-login-device">
+              <strong id="qrDeviceName">MS-5502</strong>
+              <span>Scan with the MotionStation app to sign in on this device</span>
+            </div>
+
+            <div class="qr-login-card" data-qr-view="active" id="qrActiveView">
+              <div class="qr-login-frame" aria-hidden="false">
+                <img class="qr-login-image" id="qrLoginImage" alt="Device login QR code" width="180" height="180" />
+                <div class="qr-login-fallback is-hidden" id="qrLoginFallback" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <path d="M14 14h3v3h-3zM20 14v6M14 20h6"/>
+                  </svg>
+                  <span>QR unavailable</span>
+                </div>
+              </div>
+              <p class="qr-login-countdown-label">Code expires in</p>
+              <p class="qr-login-countdown" id="qrCountdown" aria-live="polite">05:00</p>
+              <p class="qr-login-session" id="qrSessionId">Session --------</p>
+            </div>
+
+            <div class="qr-login-card qr-login-status is-hidden" data-qr-view="scanned" id="qrScannedView">
+              <div class="qr-status-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="5" y="2" width="14" height="20" rx="2"/>
+                  <path d="M12 18h.01"/>
+                </svg>
+              </div>
+              <strong>Scanned on phone</strong>
+              <span>Keep this screen open and confirm login in the app</span>
+            </div>
+
+            <div class="qr-login-card qr-login-success is-hidden" data-qr-view="confirmed" id="qrConfirmedView">
+              <div class="qr-success-avatar" id="qrSuccessAvatar" data-user-avatar>A</div>
+              <strong>Login successful</strong>
+              <span id="qrSuccessName" data-user-name>Athlete</span>
+            </div>
+
+            <div class="qr-login-card qr-login-status is-hidden" data-qr-view="expired" id="qrExpiredView">
+              <strong>QR code expired</strong>
+              <span>Refresh to generate a new code</span>
+              <button class="auth-secondary-btn" id="qrRefreshBtn" type="button">Refresh QR Code</button>
+            </div>
+
+            <p class="qr-login-status-text" id="qrStatusText" aria-live="polite">Waiting for scan</p>
+
+            <div class="qr-demo-actions" aria-label="Prototype demo controls">
+              <button class="auth-secondary-btn" id="qrSimulateScanBtn" type="button">Simulate Phone Scan</button>
+              <button class="auth-primary-btn" id="qrSimulateConfirmBtn" type="button" disabled>Simulate Phone Confirm</button>
+            </div>
+          </div>
+        </div>
+
+        <label class="auth-check-row" for="loginPolicyAgree">
+          <input id="loginPolicyAgree" type="checkbox" />
+          <span>I have read and agree to the <a href="#" aria-label="User Agreement">User Agreement</a> and <a href="#" aria-label="Privacy Policy">Privacy Policy</a>.</span>
+        </label>
+
+        <div class="auth-foot-links">
+          <button class="auth-link-btn" onclick="window.location.href='plan-b-forgot-password.html'" type="button">Forgot Password?</button>
+          <button class="auth-link-btn" onclick="window.location.href='plan-b-register.html'" type="button">Create Account</button>
+        </div>
+      </section>
+      <div class="action-dock" aria-label="Page actions">
+        <button class="action-dock-back-btn auth-back-btn" data-auth-back="plan-b-profile.html" type="button" aria-label="Back">Back</button>
+      </div>
+    </section>
+
+    <div class="auth-toast is-hidden" id="authToast" aria-live="polite"></div>
+  </main>
+
+  <script src="js/plan-b-user-store.js"></script>
+  <script src="js/plan-b-auth.js" defer></script>
+</body>
+</html>

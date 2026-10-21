@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · Plan Detail</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive.css" />
+  <link rel="stylesheet" href="css/plan-b-pilates-report.css" />
+  <link rel="stylesheet" href="css/plan-b-plan-detail.css" />
+</head>
+<body data-plan-b-page="plan-detail">
+  <main class="device-shell" aria-label="Plan B Plan Detail">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="plan-detail-screen" id="planDetailScreen" aria-label="Plan detail">
+      <div class="ad-top-row">
+        <span>Dec 6, 2024 · 10:26 AM</span>
+        <div class="ad-status-icons" aria-hidden="true">
+          <span class="ad-status-dot"></span>
+          <span class="ad-status-dot"></span>
+          <span class="ad-status-dot"></span>
+        </div>
+      </div>
+      <div class="ad-title-row plan-detail-title-row">
+        <span class="ad-title-gap" aria-hidden="true"></span>
+        <h2 class="ad-view-title">PLAN DETAIL</h2>
+        <span class="ad-title-gap" aria-hidden="true"></span>
+      </div>
+
+      <section class="plan-detail-cover-card" aria-label="Plan cover">
+        <img
+          id="planDetailCover"
+          class="plan-detail-cover"
+          src="assets/card3.jpg"
+          alt="Plan cover"
+          width="1200"
+          height="675"
+          decoding="async"
+        />
+      </section>
+
+      <section class="plan-detail-headline" aria-label="Plan overview">
+        <h1 id="planDetailTitle">Plan Name</h1>
+        <p id="planDetailIntro">Plan intro text.</p>
+        <div class="plan-detail-meta" aria-label="Plan meta">
+          <span class="plan-detail-meta-chip" id="planDetailSceneChip"><b>Scene</b><span id="planDetailScene">Strength Training</span></span>
+          <span class="plan-detail-meta-chip" id="planDetailCycleChip"><b>Cycle</b><span id="planDetailCycle">2 Weeks</span></span>
+          <span class="plan-detail-meta-chip" id="planDetailSessionsChip"><b>Sessions / Week</b><span id="planDetailSessions">3 Sessions</span></span>
+          <span class="plan-detail-meta-chip" id="planDetailDifficultyChip"><b>Difficulty</b><span id="planDetailDifficulty">Beginner</span></span>
+          <span class="plan-detail-meta-chip" id="planDetailPlanTypeChip" hidden><b>Plan Type</b><span id="planDetailPlanType">Personalized</span></span>
+        </div>
+      </section>
+
+      <section class="plan-detail-schedule" aria-label="Weekly schedule">
+        <div class="plan-detail-section-head">
+          <h3>Weekly Schedule</h3>
+          <p id="planDetailScheduleHint">Week 1 · Day 01</p>
+        </div>
+        <div class="plan-detail-week-tabs" id="planDetailWeekTabs" role="tablist" aria-label="Week tabs"></div>
+        <div class="plan-detail-day-tabs" id="planDetailDayTabs" role="tablist" aria-label="Day tabs"></div>
+        <div class="plan-detail-day-actions" id="planDetailDayActions" hidden>
+          <button class="plan-detail-day-btn plan-detail-day-btn--skip" id="planDetailSkipDayBtn" type="button">Skip</button>
+          <button class="plan-detail-day-btn plan-detail-day-btn--reschedule" id="planDetailRescheduleDayBtn" type="button">Reschedule</button>
+          <p class="plan-detail-day-action-hint" id="planDetailDayActionHint" hidden></p>
+        </div>
+      </section>
+
+      <section class="plan-detail-moves" aria-label="Moves list">
+        <div class="plan-detail-section-head">
+          <h3>Moves</h3>
+          <p>Sets, reps or duration, and optional weight are shown for each move.</p>
+        </div>
+        <div class="plan-detail-moves-list" id="planDetailMovesList"></div>
+        <p class="plan-detail-empty" id="planDetailMovesEmpty" hidden>No moves configured for this training day yet.</p>
+      </section>
+
+      <div class="plan-detail-actions" id="planDetailActions">
+        <button class="plan-detail-action-btn plan-detail-more-btn" id="planDetailMoreBtn" type="button" hidden>More</button>
+        <button class="plan-detail-join-btn plan-detail-primary-btn" id="planDetailPrimaryBtn" type="button">Join Plan</button>
+      </div>
+      <div class="action-dock" aria-label="Page actions">
+        <button class="action-dock-back-btn" id="planDetailBackBtn" type="button" aria-label="Back">Back</button>
+      </div>
+    </section>
+
+    <!-- Quit / Reset confirm dialog -->
+    <div
+      class="plan-detail-confirm-dialog"
+      id="planDetailConfirmDialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="planDetailConfirmText"
+      aria-hidden="true"
+    >
+      <div class="plan-detail-confirm-backdrop" id="planDetailConfirmBackdrop"></div>
+      <div class="plan-detail-confirm-panel">
+        <p class="plan-detail-confirm-text" id="planDetailConfirmText"></p>
+        <div class="plan-detail-confirm-actions">
+          <button type="button" class="plan-detail-confirm-btn plan-detail-confirm-btn--cancel" id="planDetailConfirmCancel">Cancel</button>
+          <button type="button" class="plan-detail-confirm-btn plan-detail-confirm-btn--ok" id="planDetailConfirmOk">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="plan-detail-calendar-dialog"
+      id="planDayRescheduleDialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="planDayRescheduleTitle"
+      aria-hidden="true"
+    >
+      <div class="plan-detail-calendar-backdrop" id="planDayRescheduleBackdrop"></div>
+      <div class="plan-detail-calendar-panel">
+        <div class="plan-detail-calendar-head">
+          <h3 id="planDayRescheduleTitle">Reschedule Training Day</h3>
+          <button class="plan-detail-calendar-close" id="planDayRescheduleCloseBtn" type="button" aria-label="Close">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+        <p class="plan-detail-calendar-desc">Select a new date for this training day.</p>
+        <div class="plan-detail-calendar-weekdays" id="planDayRescheduleWeekdays"></div>
+        <div class="plan-detail-calendar-grid" id="planDayRescheduleGrid"></div>
+        <p class="plan-detail-calendar-hint" id="planDayRescheduleHint" hidden>A training plan is already scheduled for this day.</p>
+        <div class="plan-detail-calendar-actions">
+          <button type="button" class="plan-detail-confirm-btn plan-detail-confirm-btn--cancel" id="planDayRescheduleCancel">Cancel</button>
+          <button type="button" class="plan-detail-confirm-btn plan-detail-confirm-btn--ok" id="planDayRescheduleConfirm" disabled>OK</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-detail-more-sheet" id="planDetailMoreSheet" aria-hidden="true">
+      <div class="plan-detail-more-backdrop" id="planDetailMoreBackdrop"></div>
+      <div class="plan-detail-more-panel">
+        <div class="plan-detail-more-head">
+          <h3>More Actions</h3>
+          <button class="plan-detail-more-close" id="planDetailMoreCloseBtn" type="button" aria-label="Close">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+        <div class="plan-detail-more-actions">
+          <button class="plan-detail-action-btn plan-detail-quit-btn" id="planDetailQuitBtn" type="button">Quit Plan</button>
+          <button class="plan-detail-action-btn plan-detail-reset-btn" id="planDetailResetBtn" type="button">Reset Plan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Join Plan Bottom Sheet -->
+    <div class="plan-join-bottom-sheet" id="planJoinBottomSheet" aria-hidden="true">
+      <div class="bottom-sheet-backdrop" id="planJoinBackdrop"></div>
+      <div class="bottom-sheet-panel">
+        <div class="bottom-sheet-header">
+          <h3>Select Training Days</h3>
+          <button class="bottom-sheet-close" id="planJoinCloseBtn" type="button" aria-label="Close">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+        <div class="bottom-sheet-body">
+          <p class="bottom-sheet-desc">Choose <strong id="planJoinMaxDays">3</strong> days for your training.</p>
+          <div class="bottom-sheet-days" id="planJoinDaysList"></div>
+          <p class="bottom-sheet-hint">Subsequent weeks will follow this week's training schedule.</p>
+        </div>
+        <div class="bottom-sheet-footer">
+          <button class="plan-detail-join-btn" id="planJoinConfirmBtn" type="button" disabled>Join Plan</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="js/data/explore-library.js"></script>
+  <script src="js/plan-b-verify.js" defer></script>
+  <script>
+    window.__DEV_BACKUP__ = { apiOrigin: 'http://127.0.0.1:37547' };
+  </script>
+  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+</body>
+</html>

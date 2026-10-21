@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · Personal Information</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive.css" />
+  <link rel="stylesheet" href="css/plan-b-pilates-report.css" />
+  <link rel="stylesheet" href="css/plan-b-auth.css" />
+</head>
+<body data-plan-b-page="personal-info">
+  <main class="device-shell" aria-label="Plan B personal information page">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="auth-screen" aria-label="Edit personal information">
+
+      <section class="auth-card">
+        <h1 class="auth-title">Personal Information</h1>
+        <p class="auth-subtitle">Update your details to keep your training profile accurate.</p>
+
+        <div class="auth-form">
+          <div class="auth-field">
+            <label for="profileNickname">Nickname</label>
+            <input class="auth-input" id="profileNickname" type="text" placeholder="Enter nickname" value="Alyona" />
+          </div>
+
+          <div class="auth-field">
+            <label for="profileGender">Gender</label>
+            <select class="auth-select" id="profileGender">
+              <option value="male">Male</option>
+              <option value="female" selected>Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="auth-field">
+            <span class="auth-field-group-label" id="birthdayGroupLabel">Birthday</span>
+            <div class="auth-date-row" role="group" aria-labelledby="birthdayGroupLabel">
+              <div class="auth-date-part">
+                <label class="auth-sublabel" for="profileBirthYear">Year</label>
+                <select class="auth-select" id="profileBirthYear" aria-label="Birth year">
+                  <option value="">Year</option>
+                </select>
+              </div>
+              <div class="auth-date-part">
+                <label class="auth-sublabel" for="profileBirthMonth">Month</label>
+                <select class="auth-select" id="profileBirthMonth" aria-label="Birth month">
+                  <option value="">Month</option>
+                  <option value="01">Jan</option>
+                  <option value="02">Feb</option>
+                  <option value="03">Mar</option>
+                  <option value="04">Apr</option>
+                  <option value="05">May</option>
+                  <option value="06">Jun</option>
+                  <option value="07">Jul</option>
+                  <option value="08">Aug</option>
+                  <option value="09">Sep</option>
+                  <option value="10">Oct</option>
+                  <option value="11">Nov</option>
+                  <option value="12">Dec</option>
+                </select>
+              </div>
+              <div class="auth-date-part">
+                <label class="auth-sublabel" for="profileBirthDay">Day</label>
+                <select class="auth-select" id="profileBirthDay" aria-label="Birth day">
+                  <option value="">Day</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="auth-field">
+            <label for="profileHeight">Height</label>
+            <div class="auth-unit-toggle" data-unit-toggle data-unit-target="profileHeight">
+              <button class="auth-unit-btn active" data-unit-placeholder="Height (cm)" type="button">cm</button>
+              <button class="auth-unit-btn" data-unit-placeholder="Height (ft)" type="button">ft</button>
+            </div>
+            <input class="auth-input" id="profileHeight" type="number" placeholder="Height (cm)" value="165" />
+          </div>
+
+          <div class="auth-field">
+            <label for="profileWeight">Weight</label>
+            <div class="auth-unit-toggle" data-unit-toggle data-unit-target="profileWeight">
+              <button class="auth-unit-btn active" data-unit-placeholder="Weight (kg)" type="button">kg</button>
+              <button class="auth-unit-btn" data-unit-placeholder="Weight (lbs)" type="button">lbs</button>
+            </div>
+            <input class="auth-input" id="profileWeight" type="number" placeholder="Weight (kg)" value="55" />
+          </div>
+
+          <button class="auth-primary-btn" id="personalInfoSaveBtn" type="button">Save</button>
+        </div>
+      </section>
+      <div class="action-dock" aria-label="Page actions">
+        <button class="action-dock-back-btn auth-back-btn" id="personalInfoBackBtn" type="button" aria-label="Back">Back</button>
+      </div>
+    </section>
+
+    <div class="auth-toast is-hidden" id="authToast" aria-live="polite"></div>
+  </main>
+
+  <script>
+    (function () {
+      const PROFILE_DEFAULTS = {
+        year: "1997",
+        month: "08",
+        day: "16"
+      };
+
+      const yearSelect = document.getElementById("profileBirthYear");
+      const monthSelect = document.getElementById("profileBirthMonth");
+      const daySelect = document.getElementById("profileBirthDay");
+      const backBtn = document.getElementById("personalInfoBackBtn");
+      const saveBtn = document.getElementById("personalInfoSaveBtn");
+      const toast = document.getElementById("authToast");
+
+      const populateBirthYearOptions = () => {
+        if (!yearSelect || yearSelect.options.length > 1) return;
+        const currentYear = new Date().getFullYear();
+        const minYear = currentYear - 100;
+        const frag = document.createDocumentFragment();
+        for (let y = currentYear; y >= minYear; y -= 1) {
+          const opt = document.createElement("option");
+          opt.value = String(y);
+          opt.textContent = String(y);
+          frag.appendChild(opt);
+        }
+        yearSelect.appendChild(frag);
+      };
+
+      const bindUnitToggles = () => {
+        document.querySelectorAll("[data-unit-toggle]").forEach((group) => {
+          const buttons = group.querySelectorAll(".auth-unit-btn");
+          const targetId = group.getAttribute("data-unit-target");
+          const targetInput = targetId ? document.getElementById(targetId) : null;
+          buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+              buttons.forEach((other) => other.classList.toggle("active", other === button));
+              if (targetInput) {
+                targetInput.placeholder = button.getAttribute("data-unit-placeholder") || "";
+              }
+            });
+          });
+        });
+      };
+
+      const showToast = (message, duration = 1500) => {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.remove("is-hidden");
+        window.clearTimeout(showToast._timer);
+        showToast._timer = window.setTimeout(() => {
+          toast.classList.add("is-hidden");
+        }, duration);
+      };
+
+      populateBirthYearOptions();
+      if (yearSelect) yearSelect.value = PROFILE_DEFAULTS.year;
+      if (monthSelect) monthSelect.value = PROFILE_DEFAULTS.month;
+      if (daySelect) daySelect.value = PROFILE_DEFAULTS.day;
+
+      bindUnitToggles();
+
+      backBtn?.addEventListener("click", () => {
+        window.location.href = "plan-b-account-settings.html";
+      });
+
+      saveBtn?.addEventListener("click", () => {
+        showToast("Personal information updated successfully");
+        window.setTimeout(() => {
+          window.location.href = "plan-b-account-settings.html";
+        }, 900);
+      });
+    })();
+  </script>
+</body>
+</html>

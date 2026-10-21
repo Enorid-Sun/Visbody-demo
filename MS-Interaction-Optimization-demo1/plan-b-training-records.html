@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · Training records</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive.css" />
+  <link rel="stylesheet" href="css/plan-b-pilates-report.css" />
+  <link rel="stylesheet" href="css/plan-b-training-records.css" />
+</head>
+<body data-plan-b-page="training-records">
+  <main class="device-shell" aria-label="Plan B training records">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="content tr-screen" id="trainingRecordsScreen" aria-label="All training records">
+      <div class="tr-app">
+        <header class="tr-header">
+          <div class="tr-header-copy">
+            <p class="tr-kicker">Training analysis</p>
+            <h1>All training records</h1>
+          </div>
+          <div class="tr-range-switch" role="tablist" aria-label="Time range">
+            <button class="tr-range-btn is-active" type="button" data-range="week" role="tab" aria-selected="true">Week</button>
+            <button class="tr-range-btn" type="button" data-range="month" role="tab" aria-selected="false">Month</button>
+            <button class="tr-range-btn" type="button" data-range="all" role="tab" aria-selected="false">All</button>
+          </div>
+          <div class="tr-period-nav" id="trPeriodNav">
+            <button class="tr-period-nav-btn" id="trPeriodPrev" type="button" aria-label="Previous week">
+              <span aria-hidden="true">‹</span>
+            </button>
+            <p class="tr-stat-period" id="trStatPeriod" aria-live="polite"></p>
+            <button class="tr-period-nav-btn" id="trPeriodNext" type="button" aria-label="Next week" disabled>
+              <span aria-hidden="true">›</span>
+            </button>
+          </div>
+        </header>
+
+        <div id="trChartsView">
+          <section class="tr-card" aria-label="Training volume trend">
+            <div class="tr-card-head">
+              <h2>Training volume</h2>
+              <p>Bars show total volume; the line shows the average trend</p>
+            </div>
+            <div class="tr-chart-wrap">
+              <div class="tr-chart" id="volumeChart" role="img" aria-label="Training volume trend chart"></div>
+              <div class="tr-empty-overlay" id="volumeEmptyOverlay" hidden>
+                <strong>No training records yet</strong>
+                <span>Complete more strength workouts to unlock this chart!</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="tr-card" aria-label="AI movement score trend">
+            <div class="tr-card-head">
+              <h2>AI movement score</h2>
+              <p>Score trend over the selected period</p>
+            </div>
+            <div class="tr-chart-wrap">
+              <div class="tr-chart" id="qualityChart" role="img" aria-label="AI quality trend chart"></div>
+              <div class="tr-empty-overlay" id="qualityEmptyOverlay" hidden>
+                <strong>No AI movement score data yet</strong>
+                <span>Complete more AI movements to unlock this chart!</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="tr-card" aria-label="Training structure analysis">
+            <div class="tr-card-head">
+              <h2>Training structure</h2>
+              <p>Distribution by training type and scenario</p>
+            </div>
+            <div class="tr-ring-grid">
+              <div class="tr-ring-card">
+                <h3>Source mix</h3>
+                <div class="tr-ring" id="sourceChart" role="img" aria-label="Training source mix chart"></div>
+              </div>
+              <div class="tr-ring-card">
+                <h3>Mode mix</h3>
+                <div class="tr-ring" id="modeChart" role="img" aria-label="Training mode mix chart"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="tr-card" aria-label="Body stimulus distribution">
+            <div class="tr-card-head">
+              <h2>Muscle heatmap</h2>
+              <p>The stats below come from muscle data of completed movement workouts.</p>
+            </div>
+            <div class="tr-body-map" id="bodyMapRoot">
+              <figure class="tr-body-figure tr-body-figure--front">
+                <figcaption>Front</figcaption>
+                <div class="tr-body-layout">
+                  <ul class="tr-muscle-legend tr-muscle-legend--left" id="frontMuscleLegend" aria-label="Front muscle session counts"></ul>
+                  <div class="tr-body-svg-wrap">
+                    <svg class="tr-body-svg" viewBox="0 0 120 220" aria-label="Front body view">
+                      <path class="tr-body-outline" d="M60 10c11 0 20 9 20 20 0 8-5 15-11 18l2 13 10 15-3 53-10 12v26h-16v-26l-10-12-3-53 10-15 2-13c-6-3-11-10-11-18 0-11 9-20 20-20z"/>
+                      <path id="chest" class="tr-muscle-zone" d="M45 67h30v24H45z"/>
+                      <path id="core" class="tr-muscle-zone" d="M48 93h24v34H48z"/>
+                      <path id="arms" class="tr-muscle-zone" d="M33 78h10v40H33zm44 0h10v40H77z"/>
+                      <path id="glutes" class="tr-muscle-zone" d="M47 127h26v16H47z"/>
+                      <path id="legs" class="tr-muscle-zone" d="M44 144h13v46H44zm19 0h13v46H63z"/>
+                    </svg>
+                  </div>
+                </div>
+              </figure>
+              <figure class="tr-body-figure tr-body-figure--back">
+                <figcaption>Back</figcaption>
+                <div class="tr-body-layout tr-body-layout--back">
+                  <div class="tr-body-svg-wrap">
+                    <svg class="tr-body-svg" viewBox="0 0 120 220" aria-label="Back body view">
+                      <path class="tr-body-outline" d="M60 10c11 0 20 9 20 20 0 8-5 15-11 18l2 13 10 15-3 53-10 12v26h-16v-26l-10-12-3-53 10-15 2-13c-6-3-11-10-11-18 0-11 9-20 20-20z"/>
+                      <path id="back" class="tr-muscle-zone" d="M45 67h30v48H45z"/>
+                      <path id="rearShoulders" class="tr-muscle-zone" d="M36 68h11v24H36zm37 0h11v24H73z"/>
+                      <path id="hamstrings" class="tr-muscle-zone" d="M44 144h13v46H44zm19 0h13v46H63z"/>
+                    </svg>
+                  </div>
+                  <ul class="tr-muscle-legend tr-muscle-legend--right" id="backMuscleLegend" aria-label="Back muscle session counts"></ul>
+                </div>
+              </figure>
+            </div>
+          </section>
+        </div>
+
+        <section class="tr-card tr-history-card" id="trListView" aria-label="Training history list" hidden>
+          <div class="tr-card-head tr-history-head">
+            <h2>All training</h2>
+            <button class="tr-clear-filter" id="clearChartFilterBtn" type="button" hidden>Clear filter</button>
+          </div>
+          <div class="tr-list-filter-bar" aria-label="Training record filters">
+            <div class="tr-filter-group">
+              <span class="tr-filter-group-title">Training type</span>
+              <div class="tr-filter-chips">
+                <button class="tr-filter-chip is-active" type="button" data-group="type" data-value="">All</button>
+                <button class="tr-filter-chip" type="button" data-group="type" data-value="Plan Follow">Plan follow</button>
+                <button class="tr-filter-chip" type="button" data-group="type" data-value="Free Training">Free training</button>
+                <button class="tr-filter-chip" type="button" data-group="type" data-value="Movement Follow">Movement follow</button>
+              </div>
+            </div>
+            <div class="tr-filter-group">
+              <span class="tr-filter-group-title">Scene</span>
+              <div class="tr-filter-chips">
+                <button class="tr-filter-chip is-active" type="button" data-group="scene" data-value="">All</button>
+                <button class="tr-filter-chip" type="button" data-group="scene" data-value="Strength">Strength</button>
+                <button class="tr-filter-chip" type="button" data-group="scene" data-value="Pilates">Pilates</button>
+                <button class="tr-filter-chip" type="button" data-group="scene" data-value="Cardio">Cardio</button>
+              </div>
+            </div>
+            <div class="tr-list-filter-row" lang="en">
+              <div class="tr-date-field">
+                <span class="tr-date-label">Start month</span>
+                <div class="tr-month-picker">
+                  <select class="tr-month-select" id="trFilterStartYear" aria-label="Start year">
+                    <option value="">Year</option>
+                  </select>
+                  <select class="tr-month-select" id="trFilterStartMonth" aria-label="Start month">
+                    <option value="">Month</option>
+                    <option value="01">Jan</option>
+                    <option value="02">Feb</option>
+                    <option value="03">Mar</option>
+                    <option value="04">Apr</option>
+                    <option value="05">May</option>
+                    <option value="06">Jun</option>
+                    <option value="07">Jul</option>
+                    <option value="08">Aug</option>
+                    <option value="09">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                  </select>
+                </div>
+              </div>
+              <div class="tr-date-field">
+                <span class="tr-date-label">End month</span>
+                <div class="tr-month-picker">
+                  <select class="tr-month-select" id="trFilterEndYear" aria-label="End year">
+                    <option value="">Year</option>
+                  </select>
+                  <select class="tr-month-select" id="trFilterEndMonth" aria-label="End month">
+                    <option value="">Month</option>
+                    <option value="01">Jan</option>
+                    <option value="02">Feb</option>
+                    <option value="03">Mar</option>
+                    <option value="04">Apr</option>
+                    <option value="05">May</option>
+                    <option value="06">Jun</option>
+                    <option value="07">Jul</option>
+                    <option value="08">Aug</option>
+                    <option value="09">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                  </select>
+                </div>
+              </div>
+              <button class="tr-date-reset" id="trFilterDateReset" type="button">Reset months</button>
+            </div>
+          </div>
+          <div class="tr-filter-indicator" id="activeFilterHint" hidden></div>
+          <div class="tr-history-list" id="historyListContainer"></div>
+          <p class="tr-empty-list" id="historyEmpty" hidden>No records under the current filter.</p>
+        </section>
+      </div>
+      <div class="action-dock action-dock--above-nav" aria-label="Page actions">
+        <button class="action-dock-back-btn" id="trainingRecordsBackBtn" type="button" aria-label="Back to profile">Back</button>
+      </div>
+    </section>
+
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <button class="nav-item" id="homeTabBtn" type="button" aria-label="Home">
+        <span class="nav-item-inner">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </span>
+      </button>
+      <button class="nav-item" id="allTrainingNavBtn" type="button" aria-label="All training">
+        <span class="nav-item-inner">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+          <span>All training</span>
+        </span>
+      </button>
+      <button class="nav-item active" id="profileTabBtn" type="button" aria-label="Profile">
+        <span class="nav-item-inner">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile</span>
+        </span>
+      </button>
+    </nav>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+  <script src="js/data/explore-library.js"></script>
+  <script src="js/plan-b-verify.js" defer></script>
+  <script src="js/plan-b-training-records.js" defer></script>
+  <script>
+    window.__DEV_BACKUP__ = { apiOrigin: 'http://127.0.0.1:37547' };
+  </script>
+  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+</body>
+</html>

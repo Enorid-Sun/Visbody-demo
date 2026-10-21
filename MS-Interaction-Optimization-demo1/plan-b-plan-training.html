@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · Plan training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive.css" />
+  <link rel="stylesheet" href="css/plan-b-pilates-report.css" />
+  <link rel="stylesheet" href="css/plan-b-plan-training.css" />
+</head>
+<body data-plan-b-page="plan-training">
+  <main class="device-shell" aria-label="Plan B plan training">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="immersive-workout-screen active" id="immersiveWorkoutScreen" aria-label="Plan training control" aria-hidden="false">
+      <video id="iwVideo" class="iw-video" preload="metadata" playsinline muted loop poster="assets/video.jpg">
+        <source id="iwVideoSource" src="assets/workout-demo.mp4" type="video/mp4" />
+      </video>
+      <div class="iw-mask"></div>
+      <div class="iw-overlay">
+        <header class="iw-top iw-glass pt-top">
+          <div class="iw-top-row">
+            <h2 class="iw-title" id="iwActionTitle">Plan Training</h2>
+            <div class="pt-time" id="iwTimeText">00:00 / 00:00</div>
+          </div>
+          <div class="iw-progress-row pt-progress-row">
+            <div class="pt-progress-track" id="ptProgressTrack" aria-label="Move sequence progress"></div>
+          </div>
+        </header>
+
+        <section class="iw-drawer open" id="iwDrawer">
+          <div class="iw-handle" id="iwDrawerHandle">
+            <div class="pt-summary">
+              <div class="pt-summary-main">
+                <h3 id="ptCurrentMoveName">Current move</h3>
+                <p id="ptCurrentMoveMeta">0 / 0 reps · Set 0 / 0</p>
+                <p id="ptNextMovePreview" class="pt-next-move-preview">Next: -</p>
+              </div>
+            </div>
+          </div>
+          <div class="iw-content">
+            <div class="iw-section-title">Resistance</div>
+            <div class="iw-weight-row">
+              <button class="iw-step-btn" id="iwDecreaseBtn" type="button">−</button>
+              <div class="iw-dial-container">
+                <svg class="iw-dial-svg" viewBox="0 0 160 160">
+                  <defs>
+                    <linearGradient id="iwDialGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#00D4FF"/>
+                      <stop offset="100%" stop-color="#007AFF"/>
+                    </linearGradient>
+                  </defs>
+                  <circle cx="80" cy="80" r="70" class="iw-dial-ticks"></circle>
+                  <circle cx="80" cy="80" r="54" class="iw-dial-track"></circle>
+                  <circle cx="80" cy="80" r="54" class="iw-dial-progress" id="iwDialProgress"></circle>
+                </svg>
+                <div class="iw-dial-content">
+                  <div class="iw-dial-value" id="iwWeightValue">50.0</div>
+                  <div class="iw-dial-unit">kg</div>
+                </div>
+              </div>
+              <button class="iw-step-btn" id="iwIncreaseBtn" type="button">+</button>
+            </div>
+            <div class="iw-step-note">Step: 0.5 kg</div>
+
+            <div class="iw-param-panel" id="iwParamPanel">
+              <div class="iw-param-head">
+                <span id="iwParamLabel">Spring level</span>
+                <strong id="iwParamDisplay">Level 1</strong>
+              </div>
+              <input class="iw-slider" id="iwParamSlider" type="range" min="1" max="10" step="1" value="1" />
+              <div class="iw-param-tip" id="iwParamTip"></div>
+              <div class="iw-param-submit" id="iwParamSubmit"></div>
+            </div>
+
+            <div class="iw-chart-card">
+              <div class="iw-chart-header">
+                <div class="iw-chart-tabs" id="iwChartTabs">
+                  <button class="iw-chart-tab active" data-tab="rom" type="button">ROM</button>
+                  <button class="iw-chart-tab" data-tab="power" type="button">Power</button>
+                </div>
+                <div class="iw-chart-legend" id="iwChartLegend">
+                  <div class="iw-legend-item">
+                    <span class="iw-legend-color iw-legend-range" aria-hidden="true"></span>
+                    <span>Range</span>
+                  </div>
+                  <div class="iw-legend-item">
+                    <span class="iw-legend-color iw-legend-power" aria-hidden="true"></span>
+                    <span>Power</span>
+                  </div>
+                </div>
+              </div>
+              <canvas id="iwChartCanvas" width="1000" height="320" aria-label="Chart"></canvas>
+            </div>
+
+            <div class="pt-control-bar" id="ptControlBar">
+              <div class="pt-running-controls" id="ptRunningControls">
+                <button class="pt-action-btn pt-action-btn--danger" id="ptEndTrainingBtn" type="button">End Training</button>
+                <button class="pt-action-btn pt-action-btn--primary" id="ptPauseTrainingBtn" type="button">Start Training</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="pt-rest-overlay" id="ptRestOverlay" aria-hidden="true">
+          <p class="pt-rest-label">Rest</p>
+          <p class="pt-rest-countdown" id="ptRestCountdown">30s</p>
+          <p class="pt-rest-next" id="ptRestNextMove">Up next: Next move</p>
+          <button class="pt-rest-skip" id="ptSkipRestBtn" type="button">Skip Rest</button>
+        </section>
+        <div class="action-dock action-dock--immersive" aria-label="Workout controls">
+          <button class="pt-skip-btn" id="ptSkipMoveBtn" type="button">Skip</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="js/plan-b-user-store.js"></script>
+  <script src="js/data/explore-library.js"></script>
+  <script src="js/plan-b-verify.js" defer></script>
+  <script>
+    window.__DEV_BACKUP__ = { apiOrigin: 'http://127.0.0.1:37547' };
+  </script>
+  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+</body>
+</html>

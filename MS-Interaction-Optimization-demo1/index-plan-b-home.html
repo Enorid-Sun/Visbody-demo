@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B Home Verify · UX Pro Max</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive.css" />
+  <link rel="stylesheet" href="css/plan-b-pilates-report.css" />
+  <link rel="stylesheet" href="css/plan-b-control-center.css" />
+</head>
+<body data-plan-b-page="home">
+  <main class="device-shell" aria-label="Plan B home verification">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="content" id="homeScreen">
+      <div class="top-status-row">
+        <div class="status-pill">
+          <div class="status-time">
+            <span>10:26 AM</span>
+            <small>Dec 6, 2024</small>
+          </div>
+          <div class="status-icons">
+            <span class="status-chip">Wi</span>
+            <span class="status-chip">85%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-row">
+        <div class="user-meta">
+          <div class="avatar" data-user-avatar>A</div>
+          <div class="user-text">
+            <h1 data-user-name>Alyona</h1>
+            <p>Competition mode · Week 1</p>
+          </div>
+        </div>
+        <div class="week-strip">
+          <div class="day-chip"><span>MON</span><strong>12</strong></div>
+          <div class="day-chip"><span>TUE</span><strong>13</strong></div>
+          <div class="day-chip"><span>WED</span><strong>14</strong></div>
+          <div class="day-chip"><span>THU</span><strong>15</strong></div>
+          <div class="day-chip day-chip--active"><span>FRI</span><strong>16</strong></div>
+          <div class="day-chip"><span>SAT</span><strong>17</strong></div>
+          <div class="day-chip"><span>SUN</span><strong>18</strong></div>
+        </div>
+      </div>
+
+      <section class="weekly-card" aria-label="Daily training data">
+        <div class="dial">
+          <div class="dial-inner"></div>
+          <div class="dial-center">
+            <span>Daily</span>
+            <strong>68%</strong>
+          </div>
+        </div>
+        <div class="weekly-metrics">
+          <div class="weekly-metric">
+            <label>Effort</label>
+            <div class="value">375<small>cal</small></div>
+            <p>+12% vs last day</p>
+          </div>
+          <div class="weekly-metric">
+            <label>Time</label>
+            <div class="value">19<small>min</small></div>
+            <p>+5% vs last day</p>
+          </div>
+          <div class="weekly-metric">
+            <label>Freq</label>
+            <div class="value">2<small>days</small></div>
+            <p>Same as last day</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="resume-card" aria-label="Start free training">
+        <div>
+          <strong>Start Free Training</strong>
+          <p>Choose a training type and start a new free session anytime.</p>
+        </div>
+        <button class="resume-btn" id="startTrainingModalBtn" type="button">Start Training</button>
+      </section>
+
+      <section class="today-plan-card" id="todayPlanReminder" aria-label="Today's training reminder">
+        <div class="today-plan-copy">
+          <small>Today Plan Reminder</small>
+          <strong id="todayPlanTitle">Today's Plan</strong>
+          <p id="todayPlanSubtitle">Checking your joined plans...</p>
+        </div>
+        <div class="today-plan-list" id="todayPlanList" aria-live="polite"></div>
+        <button class="resume-btn today-plan-btn" id="todayPlanActionBtn" type="button">Start Training</button>
+      </section>
+
+      <section class="banner" id="featuredPlanBanner" role="button" tabindex="0" aria-label="Open plan detail for Lean Strength 21">
+        <div class="banner-content">
+          <div>
+            <small id="featuredPlanType">Strength Training</small>
+            <h2 id="featuredPlanTitle">Lean Strength 21</h2>
+          </div>
+        </div>
+      </section>
+
+      <section class="explore-section" aria-label="Home explore">
+        <aside class="sidebar">
+          <small>Explore</small>
+          <button class="side-tab active" type="button" data-category="plans">
+            <strong>Plans</strong>
+            <span>By duration</span>
+          </button>
+          <button class="side-tab" type="button" data-category="aiMoves">
+            <strong>AI Moves</strong>
+            <span>Smart picks</span>
+          </button>
+          <button class="side-tab" type="button" data-category="moves">
+            <strong>Moves</strong>
+            <span>By muscle group</span>
+          </button>
+        </aside>
+
+        <div class="explore-main">
+          <div class="explore-head">
+            <h3 id="exploreTitle">Plans</h3>
+            <div class="explore-view-toggle" role="group" aria-label="View mode">
+              <button class="explore-view-btn active" type="button" data-view="list" aria-pressed="true">List</button>
+              <button class="explore-view-btn" type="button" data-view="waterfall" aria-pressed="false">Waterfall</button>
+            </div>
+          </div>
+          <div class="grid-wrap">
+            <div class="grid" id="exploreGrid" data-view="list"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="control-center" id="controlCenter" aria-label="Control Center">
+      <div class="cc-scrim" id="controlCenterScrim" aria-hidden="true"></div>
+      <div class="cc-panel" id="controlCenterPanel">
+        <div class="cc-dragger" id="controlCenterDrag" aria-hidden="true"></div>
+        <div class="cc-grid">
+          <div class="cc-quick-row" id="ccThemeSegment" role="group" aria-label="Quick Controls">
+            <button class="cc-quick-btn active" id="wifiToggleTile" type="button" aria-pressed="true" aria-label="Wi-Fi">
+              <span class="cc-quick-btn-icon-wrap">
+                <svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                <span class="cc-toggle-dot" aria-hidden="true"></span>
+              </span>
+              <span class="cc-quick-btn-label">Wi-Fi</span>
+            </button>
+            <button class="cc-quick-btn is-active" type="button" data-theme="dark" aria-label="Dark Mode" aria-pressed="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+            </button>
+            <button class="cc-quick-btn" type="button" data-theme="light" aria-label="Light Mode" aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M4.93 19.07l1.41-1.41"/><path d="M17.66 6.34l1.41-1.41"/></svg>
+            </button>
+          </div>
+
+          <div class="cc-slider" data-slider="brightness" role="slider" aria-label="Screen Brightness" aria-valuemin="0" aria-valuemax="100">
+            <div class="cc-slider-track">
+              <div class="cc-slider-fill"></div>
+              <div class="cc-slider-thumb"></div>
+            </div>
+            <svg class="cc-slider-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M4.93 19.07l1.41-1.41"/><path d="M17.66 6.34l1.41-1.41"/></svg>
+            <span class="cc-slider-label">Screen Brightness</span>
+          </div>
+
+          <div class="cc-slider" data-slider="volume" role="slider" aria-label="Volume" aria-valuemin="0" aria-valuemax="100">
+            <div class="cc-slider-track">
+              <div class="cc-slider-fill"></div>
+              <div class="cc-slider-thumb"></div>
+            </div>
+            <svg class="cc-slider-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path id="volumeIconPath" d="M11 5L6 9H3v6h3l5 4V5zm3.5 4.5a5 5 0 0 1 0 5m2.5-7.5a8.5 8.5 0 0 1 0 10"/></svg>
+            <span class="cc-slider-label">Volume</span>
+          </div>
+          <article class="cc-ambient" id="ccAmbientCard" aria-label="Ambient Light">
+            <div class="cc-ambient-head">
+              <div class="cc-ambient-title">
+                <svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.75V16a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-1.25A7 7 0 0 0 12 2z"/></svg>
+                <div>
+                  <p class="cc-tile-title">Ambient Light</p>
+                  <span class="cc-ambient-state" id="ambientStatusTextCc">Off</span>
+                </div>
+              </div>
+              <button class="cc-switch" id="ambientPowerToggleCc" type="button" role="switch" aria-checked="false" aria-label="Ambient Light Power">
+                <span class="cc-switch-knob"></span>
+              </button>
+            </div>
+
+            <div class="cc-ambient-row" id="ambientBrightnessRow">
+              <div class="cc-ambient-row-head">
+                <span class="cc-ambient-label">Brightness</span>
+                <span class="cc-ambient-value"><span id="ambientBrightnessValueCc">60</span>%</span>
+              </div>
+              <input id="ambientBrightnessSliderCc" class="cc-range" type="range" min="0" max="100" step="1" value="60" aria-label="Ambient Light Brightness" />
+            </div>
+
+            <div class="cc-ambient-row" id="ambientModeRow">
+              <div class="cc-ambient-row-head">
+                <span class="cc-ambient-label">Mode</span>
+              </div>
+              <div class="cc-segmented" id="ambientModeSegment">
+                <button class="cc-segment-btn is-active" id="ambientModeSteadyBtn" type="button" data-mode="steady">Steady</button>
+                <button class="cc-segment-btn" id="ambientModeBreathingBtn" type="button" data-mode="breathing">Breathing</button>
+              </div>
+              <p class="cc-ambient-note" id="ambientModeLockHint">Mode is locked when sync is enabled.</p>
+            </div>
+          </article>
+
+          <article class="cc-music playing" id="ccMusicCard" aria-label="Music Player">
+            <div class="cc-music-head">
+              <div class="cc-music-copy">
+                <strong id="ccMusicTitle">Night Sprint</strong>
+                <span id="ccMusicArtist">Pulse Drive</span>
+              </div>
+              <div class="cc-music-actions">
+                <button class="cc-btn cc-btn--head" id="ccShuffleBtn" type="button" aria-label="Shuffle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                </button>
+                <button class="cc-btn cc-btn--head" id="ccPlaylistToggleBtn" type="button" aria-label="Toggle Playlist" aria-expanded="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="cc-progress-wrap">
+              <span class="cc-progress-time" id="ccCurrentTime">00:48</span>
+              <div class="cc-progress" aria-hidden="true">
+                <div class="cc-progress-fill" id="ccProgressFill"></div>
+              </div>
+              <span class="cc-progress-time" id="ccTotalTime">03:20</span>
+            </div>
+
+            <div class="cc-controls">
+              <button class="cc-btn" id="ccPrevBtn" type="button" aria-label="Previous">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 6h2v12H6zM18 6v12l-8-6z"/></svg>
+              </button>
+              <button class="cc-btn cc-btn--play" id="ccPlayBtn" type="button" aria-label="Pause">
+                <svg id="ccPlayIcon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M8 5v14l11-7z"/></svg>
+                <svg id="ccPauseIcon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+              </button>
+              <button class="cc-btn" id="ccNextBtn" type="button" aria-label="Next">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 6h2v12h-2zM6 6l8 6-8 6z"/></svg>
+              </button>
+            </div>
+
+            <div class="cc-playlist is-collapsed" id="ccPlaylistPanel" aria-hidden="true">
+              <ul class="cc-playlist-list" id="ccPlaylistList"></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <button class="cc-bottom-handle" id="controlCenterHandle" type="button" aria-label="Open Control Center" aria-expanded="false">
+      <span class="cc-bottom-handle-pill" aria-hidden="true"></span>
+    </button>
+
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <button class="nav-item active" id="homeTabBtn" type="button" aria-label="Home">
+        <span class="nav-item-inner">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        </span>
+      </button>
+      <button class="nav-item" id="allTrainingNavBtn" type="button" aria-label="All Training">
+        <span class="nav-item-inner">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+          <span>All Training</span>
+        </span>
+      </button>
+      <button class="nav-item" id="profileTabBtn" type="button" aria-label="Profile">
+        <span class="nav-item-inner">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile</span>
+        </span>
+      </button>
+    </nav>
+
+    <div class="training-modal" id="trainingTypeModal" aria-hidden="true">
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="trainingTypeTitle">
+        <div class="modal-head">
+          <h3 id="trainingTypeTitle">Choose training type</h3>
+          <button class="close-btn" id="closeTrainingTypeModal" type="button" aria-label="Close">✕</button>
+        </div>
+        <button class="training-btn" id="strengthTrainingBtn" type="button">
+          <strong>Strength Training</strong>
+          <span>Free weight, resistance modes, detailed data</span>
+        </button>
+        <button class="training-btn" id="pilatesTrainingBtn" type="button">
+          <strong>Pilates</strong>
+          <span>Core control &amp; stability</span>
+        </button>
+        <button class="training-btn" id="resistanceCardioBtn" type="button">
+          <strong>Resistance Cardio</strong>
+          <span>Rowing, skiing, and cardio with resistance control</span>
+        </button>
+      </div>
+    </div>
+
+  </main>
+  <script src="js/plan-b-user-store.js"></script>
+  <script src="js/data/explore-library.js"></script>
+  <script src="js/plan-b-verify.js" defer></script>
+  <script src="js/plan-b-control-center.js" defer></script>
+  <script>
+    window.__DEV_BACKUP__ = { apiOrigin: 'http://127.0.0.1:37547' };
+  </script>
+  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+</body>
+</html>

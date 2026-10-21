@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · Account Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive.css" />
+  <link rel="stylesheet" href="css/plan-b-pilates-report.css" />
+  <link rel="stylesheet" href="css/plan-b-auth.css" />
+<style>
+    .settings-screen {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-main);
+      padding: 66px 18px 24px;
+      overflow-y: auto;
+    }
+    .settings-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    .settings-back-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      cursor: pointer;
+      margin-right: 0;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .settings-back-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .settings-back-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+    .settings-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
+      letter-spacing: 1px;
+    }
+    .settings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .list-btn {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line-soft);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      backdrop-filter: blur(8px);
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+    .list-btn:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.15);
+    }
+    .list-btn svg {
+      width: 20px;
+      height: 20px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body data-plan-b-page="account-settings">
+  <main class="device-shell" aria-label="Plan B account settings page">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="settings-screen" aria-label="Account settings">
+      <div class="top-status-row">
+        <div class="status-pill">
+          <div class="status-time">
+            <span>10:26 AM</span>
+            <small>Dec 6, 2024</small>
+          </div>
+          <div class="status-icons">
+            <span class="status-chip">Wi</span>
+            <span class="status-chip">85%</span>
+          </div>
+        </div>
+      </div>
+
+      <header class="settings-header">
+        <h1 class="settings-title">ACCOUNT SETTINGS</h1>
+      </header>
+
+      <div class="settings-list">
+        <button class="list-btn" id="personalInfoBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 1 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>PERSONAL INFORMATION</span>
+        </button>
+
+        <button class="list-btn" id="resetPasswordBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>RESET PASSWORD</span>
+        </button>
+
+        <button class="list-btn" id="deleteAccountBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+          <span>DELETE ACCOUNT</span>
+        </button>
+
+        <button class="list-btn" id="logoutAccountBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+          <span>LOG OUT</span>
+        </button>
+      </div>
+      <div class="action-dock" aria-label="Page actions">
+        <button class="action-dock-back-btn" id="accountSettingsBackBtn" type="button" aria-label="Back">Back</button>
+      </div>
+    </section>
+
+    <div class="auth-confirm-modal is-hidden" id="deleteConfirmModal" aria-hidden="true">
+      <div class="auth-confirm-panel" role="dialog" aria-modal="true" aria-labelledby="deleteConfirmTitle">
+        <h3 id="deleteConfirmTitle">Are you sure you want to delete your current account? You will need to register again.</h3>
+        <div class="auth-confirm-actions">
+          <button class="auth-confirm-btn auth-confirm-cancel" id="deleteCancelBtn" type="button">Cancel</button>
+          <button class="auth-confirm-btn auth-confirm-ok" id="deleteConfirmBtn" type="button">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-confirm-modal is-hidden" id="logoutConfirmModal" aria-hidden="true">
+      <div class="auth-confirm-panel" role="dialog" aria-modal="true" aria-labelledby="logoutConfirmTitle">
+        <h3 id="logoutConfirmTitle">Are you sure you want to log out?</h3>
+        <div class="auth-confirm-actions">
+          <button class="auth-confirm-btn auth-confirm-cancel" id="logoutCancelBtn" type="button">Cancel</button>
+          <button class="auth-confirm-btn auth-confirm-ok" id="logoutConfirmBtn" type="button">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-toast is-hidden" id="authToast" aria-live="polite"></div>
+  </main>
+
+  <script>
+    (function () {
+      const backBtn = document.getElementById("accountSettingsBackBtn");
+      const personalInfoBtn = document.getElementById("personalInfoBtn");
+      const resetPasswordBtn = document.getElementById("resetPasswordBtn");
+      const deleteAccountBtn = document.getElementById("deleteAccountBtn");
+      const logoutAccountBtn = document.getElementById("logoutAccountBtn");
+      const deleteConfirmModal = document.getElementById("deleteConfirmModal");
+      const deleteCancelBtn = document.getElementById("deleteCancelBtn");
+      const deleteConfirmBtn = document.getElementById("deleteConfirmBtn");
+      const logoutConfirmModal = document.getElementById("logoutConfirmModal");
+      const logoutCancelBtn = document.getElementById("logoutCancelBtn");
+      const logoutConfirmBtn = document.getElementById("logoutConfirmBtn");
+      const toast = document.getElementById("authToast");
+
+      if (!backBtn || !personalInfoBtn || !resetPasswordBtn || !deleteAccountBtn || !logoutAccountBtn || !deleteConfirmModal || !deleteCancelBtn || !deleteConfirmBtn || !logoutConfirmModal || !logoutCancelBtn || !logoutConfirmBtn || !toast) {
+        return;
+      }
+
+      const showToast = (message, duration = 1500) => {
+        toast.textContent = message;
+        toast.classList.remove("is-hidden");
+        window.clearTimeout(showToast._timer);
+        showToast._timer = window.setTimeout(() => {
+          toast.classList.add("is-hidden");
+        }, duration);
+      };
+
+      const toggleModal = (modal, visible) => {
+        modal.classList.toggle("is-hidden", !visible);
+        modal.setAttribute("aria-hidden", visible ? "false" : "true");
+      };
+
+      backBtn.addEventListener("click", () => {
+        window.location.href = "plan-b-profile.html";
+      });
+
+      personalInfoBtn.addEventListener("click", () => {
+        window.location.href = "plan-b-personal-info.html";
+      });
+
+      resetPasswordBtn.addEventListener("click", () => {
+        window.location.href = "plan-b-reset-password.html";
+      });
+
+      deleteAccountBtn.addEventListener("click", () => toggleModal(deleteConfirmModal, true));
+      deleteCancelBtn.addEventListener("click", () => toggleModal(deleteConfirmModal, false));
+      deleteConfirmModal.addEventListener("click", (event) => {
+        if (event.target === deleteConfirmModal) {
+          toggleModal(deleteConfirmModal, false);
+        }
+      });
+
+      deleteConfirmBtn.addEventListener("click", () => {
+        toggleModal(deleteConfirmModal, false);
+        if (window.PlanBUserStore) window.PlanBUserStore.logout();
+        showToast("Account deleted successfully");
+        window.setTimeout(() => {
+          window.location.href = "plan-b-login.html";
+        }, 1000);
+      });
+
+      logoutAccountBtn.addEventListener("click", () => toggleModal(logoutConfirmModal, true));
+      logoutCancelBtn.addEventListener("click", () => toggleModal(logoutConfirmModal, false));
+      logoutConfirmModal.addEventListener("click", (event) => {
+        if (event.target === logoutConfirmModal) {
+          toggleModal(logoutConfirmModal, false);
+        }
+      });
+      logoutConfirmBtn.addEventListener("click", () => {
+        toggleModal(logoutConfirmModal, false);
+        if (window.PlanBUserStore) window.PlanBUserStore.logout();
+        window.location.href = "plan-b-login.html";
+      });
+    })();
+  </script>
+  <script src="js/plan-b-user-store.js"></script>
+</body>
+</html>

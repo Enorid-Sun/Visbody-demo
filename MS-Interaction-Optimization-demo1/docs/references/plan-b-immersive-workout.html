@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · Immersive workout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive.css" />
+  <link rel="stylesheet" href="css/plan-b-pilates-report.css" />
+</head>
+<body data-plan-b-page="immersive">
+  <main class="device-shell" aria-label="Plan B home verification">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+<section class="immersive-workout-screen active" id="immersiveWorkoutScreen" aria-label="Immersive workout control" aria-hidden="false">
+      <video id="iwVideo" class="iw-video" preload="metadata" playsinline autoplay muted loop poster="assets/video.jpg">
+        <source id="iwVideoSource" src="assets/workout-demo.mp4" type="video/mp4" />
+      </video>
+      <div class="iw-mask"></div>
+      <div class="iw-ai-ready-overlay" id="iwAiReadyOverlay" aria-hidden="true">
+        <div class="iw-ai-ready-panel" id="iwAiReadyPanel" data-recog-state="scanning">
+          <header class="iw-recog-topbar">
+            <h3 class="iw-recog-title">AI 识别</h3>
+          </header>
+          <div class="iw-recog-body">
+            <div class="iw-recog-zone" id="iwRecogZone">
+              <p class="iw-recog-zone-alert" id="iwRecogAlert" hidden aria-live="polite">请确保相机镜头未被遮挡或环境光不存在过暗或过曝情况。</p>
+              <div class="iw-recog-zone-frame" id="iwRecogZoneFrame">
+                <svg class="iw-recog-figure" viewBox="0 0 90 120" fill="none" aria-hidden="true">
+                  <circle cx="45" cy="23" r="10"></circle>
+                  <path d="M45 36v30M27 60h36M32 108l13-24l13 24M36 50l-9 26M54 50l9 26"></path>
+                </svg>
+                <span class="iw-recog-complete-badge" id="iwRecogCompleteBadge" hidden aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 12.5l2.5 2.5L16 9"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <p class="iw-recog-hint" id="iwRecogHint">请面向屏幕站立确保相机能够有效识别。</p>
+            <p class="iw-recog-status" id="iwRecogStatus" aria-live="polite">识别中…</p>
+          </div>
+        </div>
+      </div>
+      <div class="iw-combo-badge" id="iwComboBadge" hidden>Combo * 3</div>
+      <div class="iw-overlay">
+        <header class="iw-top iw-glass">
+          <div class="iw-top-row">
+            <h2 class="iw-title" id="iwActionTitle">Workout Title</h2>
+          </div>
+          <div class="iw-progress-row">
+            <div class="iw-progress-track"><i class="iw-progress-fill" id="iwProgressFill"></i></div>
+            <div class="iw-time" id="iwTimeText">00:00 / 10:00</div>
+          </div>
+            <div class="iw-ai-panel" id="iwAiPanel">
+              <div class="iw-ai-result" id="iwAiResult" data-person-visible="true">
+                <span class="iw-ai-label">Recognition</span>
+                <span class="iw-ai-tier" id="iwAiTierValue">Miss</span>
+                <p class="iw-ai-hint" id="iwAiHintText">Action not recognized.</p>
+              </div>
+              <div class="iw-ai-ring-card" aria-label="Action score">
+                <div class="iw-ai-ring-stage">
+                  <svg class="iw-ai-ring-svg" viewBox="0 0 120 120" role="img" aria-hidden="true">
+                    <g transform="rotate(-90 60 60)">
+                      <circle class="iw-ai-ring-track" cx="60" cy="60" r="46"></circle>
+                      <circle class="iw-ai-ring-progress" id="iwAiScoreRing" cx="60" cy="60" r="46"></circle>
+                    </g>
+                  </svg>
+                  <div class="iw-ai-ring-center">
+                    <strong id="iwAiScoreValue">0</strong>
+                    <span class="iw-ai-ring-caption">Score</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </header>
+        <section class="iw-drawer" id="iwDrawer">
+          <div class="iw-handle" id="iwDrawerHandle">
+            <div class="iw-summary">
+              <div>
+                <span>Resistance: <b id="iwSummaryMode">Standard</b></span>
+                <span><strong id="iwSummaryWeight">50.0</strong>kg</span>
+              </div>
+              <div class="iw-chip-row">
+                <span class="iw-chip iw-chip--mode" id="iwModeChip">Standard</span>
+                <span class="iw-chip" id="iwMetaChip">Power stable</span>
+                <button class="iw-equip-btn active" type="button" data-equipment="barbell" id="iwEquipBarbell" aria-label="Barbell mode">
+                  <svg viewBox="0 0 24 24"><path d="M3 9v6M6 7v10M9 10v4M15 10v4M18 7v10M21 9v6M9 12h6"></path></svg>
+                  <span>Barbell</span>
+                </button>
+                <button class="iw-equip-btn" type="button" data-equipment="other" id="iwEquipOther" aria-label="Other mode">
+                  <svg viewBox="0 0 24 24"><path d="M6 12h12M8 8l-2 4 2 4M16 8l2 4-2 4"></path></svg>
+                  <span>Other</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="iw-content">
+            <div class="iw-section-title">Resistance mode</div>
+            <div class="iw-mode-group" id="iwModeGroup">
+              <button class="iw-mode-btn active" data-mode="standard" type="button">Standard</button>
+              <button class="iw-mode-btn" data-mode="spring" type="button">Spring</button>
+              <button class="iw-mode-btn" data-mode="eccentric" type="button">Eccentric</button>
+              <button class="iw-mode-btn" data-mode="isokinetic" type="button">Isokinetic</button>
+            </div>
+            <div class="iw-section-title">Resistance</div>
+            <div class="iw-weight-row">
+              <button class="iw-step-btn" id="iwDecreaseBtn" type="button">−</button>
+              <div class="iw-dial-container">
+                <svg class="iw-dial-svg" viewBox="0 0 160 160">
+                  <defs>
+                    <linearGradient id="iwDialGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#00D4FF"/>
+                      <stop offset="100%" stop-color="#007AFF"/>
+                    </linearGradient>
+                  </defs>
+                  <circle cx="80" cy="80" r="70" class="iw-dial-ticks"></circle>
+                  <circle cx="80" cy="80" r="54" class="iw-dial-track"></circle>
+                  <circle cx="80" cy="80" r="54" class="iw-dial-progress" id="iwDialProgress"></circle>
+                </svg>
+                <div class="iw-dial-content">
+                  <div class="iw-dial-value" id="iwWeightValue">50.0</div>
+                  <div class="iw-dial-unit">kg</div>
+                </div>
+              </div>
+              <button class="iw-step-btn" id="iwIncreaseBtn" type="button">+</button>
+            </div>
+            <div class="iw-step-note">Step: 0.5 kg</div>
+            <div class="spring-bar iw-spring-bar" id="iwSpringBar" hidden aria-label="Resistance spring indicator">
+              <div class="spring-bar-coil" id="iwSpringCoil"></div>
+              <span class="spring-bar-value" id="iwSpringBarValue">5 kg</span>
+            </div>
+            <div class="iw-param-panel" id="iwParamPanel">
+              <div class="iw-param-head">
+                <span id="iwParamLabel">Spring level</span>
+                <strong id="iwParamDisplay">Level 1</strong>
+              </div>
+              <input class="iw-slider" id="iwParamSlider" type="range" min="1" max="10" step="1" value="1" />
+              <div class="iw-param-tip" id="iwParamTip"></div>
+              <div class="iw-param-submit" id="iwParamSubmit"></div>
+            </div>
+            <div class="iw-chart-card">
+              <div class="iw-chart-header">
+                <div class="iw-chart-tabs" id="iwChartTabs">
+                  <button class="iw-chart-tab active" data-tab="rom" type="button">ROM</button>
+                  <button class="iw-chart-tab" data-tab="power" type="button">Power</button>
+                </div>
+                <div class="iw-chart-legend" id="iwChartLegend">
+                  <div class="iw-legend-item">
+                    <span class="iw-legend-color iw-legend-range" aria-hidden="true"></span>
+                    <span>Range</span>
+                  </div>
+                  <div class="iw-legend-item">
+                    <span class="iw-legend-color iw-legend-power" aria-hidden="true"></span>
+                    <span>Power</span>
+                  </div>
+                </div>
+              </div>
+              <canvas id="iwChartCanvas" width="1000" height="320" aria-label="Chart"></canvas>
+            </div>
+          </div>
+        </section>
+        <div class="action-dock action-dock--immersive action-dock--spread" aria-label="Workout controls">
+          <div class="iw-ctrls">
+            <button class="iw-btn" id="iwFlipBtn" type="button">Flip</button>
+            <button class="iw-btn" id="iwPlayBtn" type="button">Pause</button>
+            <button class="iw-btn iw-btn--end" id="iwEndBtn" type="button">End</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="js/plan-b-user-store.js"></script>
+  <script src="js/data/explore-library.js"></script>
+  <script src="js/plan-b-verify.js" defer></script>
+  <script>
+    window.__DEV_BACKUP__ = { apiOrigin: 'http://127.0.0.1:37547' };
+  </script>
+  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+</body>
+</html>

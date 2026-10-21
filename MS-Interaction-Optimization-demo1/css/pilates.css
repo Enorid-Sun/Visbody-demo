@@ -1,0 +1,294 @@
+.pilates-view {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  display: none;
+  overflow: auto;
+  background: linear-gradient(135deg, #03070f 0%, #07111e 58%, #0b1a2a 100%);
+  border-radius: 32px;
+}
+
+.pilates-view.is-active {
+  display: block;
+}
+
+.pilates-view .pilates-bar {
+  display: none;
+}
+
+.pilates-view .pilates-bar h2 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.pilates-view .back-btn {
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(148, 163, 184, 0.2);
+  color: #e2e8f0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.pilates-view .back-btn:hover {
+  background: rgba(0, 122, 255, 0.35);
+  color: #fff;
+}
+
+.pilates-view .dashboard {
+  --bg-0: #03070f;
+  --bg-1: #07111e;
+  --bg-2: #0b1a2a;
+  --text: #edf4ff;
+  --muted: rgba(201, 218, 238, 0.58);
+  --power-level: 0.28;
+  width: 100%;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 24px;
+  padding: 18px 18px 28px;
+  position: relative;
+  isolation: isolate;
+}
+
+.pilates-view .dashboard::before,
+.pilates-view .dashboard::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(55px);
+  opacity: 0.5;
+}
+
+.pilates-view .dashboard::before {
+  width: 42vw;
+  height: 42vw;
+  left: -16vw;
+  top: -20vw;
+  background: radial-gradient(circle, rgba(95, 216, 255, 0.28), transparent 70%);
+}
+
+.pilates-view .dashboard::after {
+  width: 46vw;
+  height: 46vw;
+  right: -20vw;
+  bottom: -26vw;
+  background: radial-gradient(circle, rgba(255, 153, 95, 0.28), transparent 70%);
+}
+
+.pilates-view .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.pilates-view .title-block h1 { font-family: "Barlow Condensed", sans-serif; font-size: clamp(1.6rem, 4vw, 2.2rem); letter-spacing: 0.04em; font-weight: 800; text-transform: uppercase; }
+.pilates-view .title-block p { margin-top: 4px; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.03em; }
+.pilates-view .system-status { color: rgba(220, 235, 255, 0.78); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.72; text-align: right; }
+.pilates-view .main { display: grid; grid-template-columns: 1fr; gap: 20px; min-height: 0; }
+.pilates-view .left, .pilates-view .right { min-height: 0; display: flex; flex-direction: column; gap: 16px; }
+.pilates-view .panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)), linear-gradient(180deg, rgba(8, 16, 28, 0.86), rgba(7, 14, 24, 0.8));
+  border-radius: 22px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pilates-view .panel::before {
+  content: "";
+  position: absolute;
+  inset: -30% -10% auto -20%;
+  height: 55%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.pilates-view .panel-title { font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; opacity: 0.85; position: relative; z-index: 1; }
+.pilates-view .metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; flex: 1; }
+.pilates-view .metric {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)), radial-gradient(circle at 10% 0, rgba(94, 234, 255, 0.08), transparent 45%);
+  border-radius: 18px;
+  padding: 12px 14px;
+  box-shadow: 0 20px 38px rgba(0, 0, 0, 0.24);
+}
+
+.pilates-view .metric label { display: block; color: rgba(198, 214, 233, 0.56); text-transform: uppercase; letter-spacing: 0.11em; font-size: 0.65rem; margin-bottom: 6px; }
+.pilates-view .metric strong { font-family: "Archivo Black", sans-serif; font-style: italic; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 0.9; font-weight: 800; letter-spacing: 0.02em; display: inline-flex; gap: 4px; align-items: baseline; text-shadow: 0 16px 35px rgba(0, 0, 0, 0.45); }
+.pilates-view .metric strong small { font-size: 0.9rem; color: rgba(192, 211, 235, 0.66); font-family: "Barlow", sans-serif; font-weight: 600; letter-spacing: 0.04em; }
+.pilates-view .spring-layout { display: flex; flex-direction: column; gap: 16px; min-height: clamp(320px, 40vh, 420px); }
+.pilates-view .spring-list { display: flex; justify-content: space-around; gap: 8px; align-items: flex-end; flex: 1; padding-bottom: 10px; }
+.pilates-view .spring {
+  border: none; border-radius: 18px; background: transparent; cursor: pointer; color: var(--text); padding: 0; opacity: 0.55;
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 200ms ease, filter 200ms ease;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  width: clamp(48px, 12vw, 72px); height: 100%;
+}
+
+.pilates-view .spring.is-active { opacity: 1; transform: translateY(-4px) scale(1.02); filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.4)); }
+.pilates-view .coil {
+  width: 100%;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+  transition: height 300ms cubic-bezier(0.34, 1.56, 0.64, 1), transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: perspective(1000px) rotateX(15deg);
+  transform-origin: 50% 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    inset 0 -10px 20px rgba(0, 0, 0, 0.4),
+    0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.pilates-view .spring[data-kg="12"] .coil { height: clamp(120px, 18vh, 220px); }
+.pilates-view .spring[data-kg="6.5"] .coil { height: clamp(88px, 12vh, 150px); }
+.pilates-view .spring[data-kg="5"] .coil { height: clamp(56px, 8vh, 100px); }
+.pilates-view .spring:active .coil { transform: perspective(1000px) rotateX(15deg) scaleY(0.95); }
+
+.pilates-view .coil::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background:
+    /* coil rings 3d realistic */
+    repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.4) 0 1px,
+      rgba(255, 255, 255, 0.1) 1px 4px,
+      rgba(0, 0, 0, 0.3) 4px 6px,
+      rgba(0, 0, 0, 0.1) 6px 8px,
+      transparent 8px 14px
+    ),
+    /* helix highlight material glossy */
+    linear-gradient(
+      70deg,
+      rgba(255, 255, 255, 0.5) 0 10%,
+      transparent 10% 50%,
+      rgba(0, 0, 0, 0.4) 50% 90%,
+      rgba(255, 255, 255, 0.2) 90% 100%
+    );
+  opacity: 0.95;
+  mix-blend-mode: hard-light;
+}
+
+.pilates-view .coil::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  pointer-events: none;
+  background:
+    /* complex multi-layer shadows for 3d cylindrical depth */
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.4) 95%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.3) 100%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2) 5%, transparent 20%, transparent 80%, rgba(255, 255, 255, 0.1) 95%);
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Complex gradients 8-12 stops for Skewmorphic metalic colors */
+.pilates-view .spring[data-color="green"] .coil { background: linear-gradient(180deg, #8cf0c3 0%, #6fe3ad 15%, #4ac794 50%, #2fb383 85%, #1d8f66 100%); box-shadow: 0 10px 20px rgba(111, 225, 178, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.5); }
+.pilates-view .spring[data-color="yellow"] .coil { background: linear-gradient(180deg, #ffe7b3 0%, #ffdb92 15%, #f2c174 50%, #e8aa57 85%, #c2883e 100%); box-shadow: 0 10px 20px rgba(255, 189, 105, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.5); }
+.pilates-view .spring[data-color="red"] .coil { background: linear-gradient(180deg, #ffb3aa 0%, #ff9789 15%, #eb796e 50%, #d95f6c 85%, #b54552 100%); box-shadow: 0 10px 20px rgba(255, 127, 112, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.5); }
+
+.pilates-view .spring.is-active[data-color="green"] .coil { box-shadow: 0 15px 30px rgba(111, 225, 178, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.8); filter: brightness(1.15) contrast(1.05); }
+.pilates-view .spring.is-active[data-color="yellow"] .coil { box-shadow: 0 15px 30px rgba(255, 189, 105, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.8); filter: brightness(1.15) contrast(1.05); }
+.pilates-view .spring.is-active[data-color="red"] .coil { box-shadow: 0 15px 30px rgba(255, 127, 112, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.8); filter: brightness(1.15) contrast(1.05); }
+
+.pilates-view .spring .spring-value {
+  display: block; font-size: clamp(0.78rem, 2.2vw, 1rem); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.1;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(220, 238, 255, 0.95) 25%, rgba(180, 220, 255, 0.9) 50%, rgba(255, 255, 255, 0.92) 75%, rgba(200, 230, 255, 0.88) 100%);
+  background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: none;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 12px rgba(94, 234, 255, 0.35)) drop-shadow(0 1px 0 rgba(255, 255, 255, 0.4));
+  position: relative; animation: springValueShimmer 5s ease-in-out infinite;
+}
+
+.pilates-view .spring .spring-value::before {
+  content: "";
+  position: absolute; inset: -2px -4px -2px -4px;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 45%), radial-gradient(circle at 70% 80%, rgba(94, 234, 255, 0.15) 0%, transparent 40%);
+  border-radius: 4px; pointer-events: none; z-index: -1; opacity: 0.9;
+}
+
+.pilates-view .spring[data-color="green"] .spring-value {
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(180, 255, 220, 0.95) 35%, rgba(111, 230, 178, 0.92) 60%, rgba(200, 255, 230, 0.9) 100%);
+  background-size: 200% 200%; -webkit-background-clip: text; background-clip: text;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 10px rgba(111, 225, 178, 0.5)) drop-shadow(0 1px 0 rgba(255, 255, 255, 0.35));
+}
+
+.pilates-view .spring[data-color="yellow"] .spring-value {
+  background: linear-gradient(165deg, rgba(255, 252, 240, 0.98) 0%, rgba(255, 230, 180, 0.95) 35%, rgba(255, 210, 120, 0.92) 60%, rgba(255, 235, 200, 0.9) 100%);
+  background-size: 200% 200%; -webkit-background-clip: text; background-clip: text;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 10px rgba(255, 189, 105, 0.5)) drop-shadow(0 1px 0 rgba(255, 255, 255, 0.35));
+}
+
+.pilates-view .spring[data-color="red"] .spring-value {
+  background: linear-gradient(165deg, rgba(255, 248, 248, 0.98) 0%, rgba(255, 210, 200, 0.95) 35%, rgba(255, 160, 150, 0.92) 60%, rgba(255, 220, 210, 0.9) 100%);
+  background-size: 200% 200%; -webkit-background-clip: text; background-clip: text;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35)) drop-shadow(0 0 10px rgba(255, 127, 112, 0.5)) drop-shadow(0 1px 0 rgba(255, 255, 255, 0.3));
+}
+
+@keyframes springValueShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.pilates-view .spring .spring-label { display: block; margin-top: 2px; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(198, 217, 240, 0.56); }
+.pilates-view .controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.pilates-view .controls button {
+  border: none; border-radius: 14px; min-height: 46px; color: #f4f8ff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: pointer; transition: transform 180ms ease, filter 180ms ease, box-shadow 220ms ease; box-shadow: 0 12px 22px rgba(0, 0, 0, 0.24);
+}
+
+.pilates-view .controls button:hover { transform: translateY(-1px); filter: brightness(1.07); }
+.pilates-view .start-btn { background: linear-gradient(120deg, rgba(56, 196, 186, 0.95), rgba(88, 141, 255, 0.95)); box-shadow: 0 12px 22px rgba(0, 0, 0, 0.24), 0 0 24px rgba(92, 173, 255, 0.38); }
+.pilates-view .end-btn { background: linear-gradient(120deg, rgba(250, 145, 100, 0.95), rgba(221, 86, 98, 0.95)); box-shadow: 0 12px 22px rgba(0, 0, 0, 0.24), 0 0 24px rgba(255, 136, 109, 0.36); }
+.pilates-view .flip-btn { background: linear-gradient(120deg, rgba(104, 120, 255, 0.95), rgba(85, 183, 255, 0.95)); box-shadow: 0 12px 22px rgba(0, 0, 0, 0.24), 0 0 24px rgba(112, 165, 255, 0.38); }
+
+.pilates-view .chart-panel { display: flex; flex-direction: column; gap: 14px; position: relative; flex: 1; min-height: 260px; }
+.pilates-view .chart-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; position: relative; z-index: 1; }
+.pilates-view .chart-panel .panel-title { margin-bottom: 0; }
+.pilates-view .chart-legend { display: flex; gap: 14px; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(220, 235, 255, 0.7); }
+.pilates-view .legend-item { display: flex; align-items: center; gap: 6px; }
+.pilates-view .legend-color { width: 14px; height: 4px; border-radius: 2px; }
+.pilates-view .color-range { background: linear-gradient(90deg, #5eeaff, #7cb2ff); box-shadow: 0 0 8px rgba(94, 234, 255, 0.6); }
+.pilates-view .color-power { background: linear-gradient(90deg, #ffae63, #ff7c46); box-shadow: 0 0 8px rgba(255, 174, 99, 0.6); }
+.pilates-view .chart-wrap {
+  position: relative; flex: 1; min-height: 200px; border-radius: 18px;
+  background: radial-gradient(circle at 14% 20%, rgba(94, 234, 255, 0.12), transparent 42%), radial-gradient(circle at 84% 30%, rgba(255, 174, 99, 0.13), transparent 48%), linear-gradient(180deg, rgba(8, 14, 24, 0.86), rgba(7, 12, 22, 0.95));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04); overflow: hidden; display: flex;
+}
+
+.pilates-view #romPowerCanvas { width: 100%; height: 100%; display: block; min-height: 200px; }
+.pilates-view .footer {
+  min-height: 64px; border-radius: 20px; display: flex; justify-content: center; align-items: center; gap: 16px;
+  background: linear-gradient(120deg, rgba(55, 118, 255, 0.84), rgba(255, 152, 87, 0.82)), radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.16), transparent 38%);
+  box-shadow: 0 24px 44px rgba(0, 0, 0, 0.38), 0 0 0 0 rgba(93, 178, 255, 0.24);
+  animation: resistancePulse 2.4s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.pilates-view .footer::after {
+  content: "";
+  position: absolute; inset: -24%;
+  background: radial-gradient(circle at center, rgba(123, 214, 255, 0.24), transparent 60%);
+  filter: blur(26px);
+  pointer-events: none;
+}
+
+.pilates-view .footer label, .pilates-view .footer strong { position: relative; z-index: 1; text-transform: uppercase; letter-spacing: 0.08em; }
+.pilates-view .footer label { color: rgba(237, 246, 255, 0.9); font-size: 0.78rem; opacity: 0.9; }
+.pilates-view .footer strong { font-family: "Archivo Black", sans-serif; font-style: italic; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+
+@keyframes resistancePulse {
+  0%, 100% { box-shadow: 0 24px 44px rgba(0, 0, 0, 0.38), 0 0 0 0 rgba(93, 178, 255, 0.24); }
+  50% { box-shadow: 0 28px 54px rgba(0, 0, 0, 0.42), 0 0 0 22px rgba(93, 178, 255, 0.11); }
+}
+

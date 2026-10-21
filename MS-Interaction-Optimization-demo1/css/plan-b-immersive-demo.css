@@ -1,0 +1,58 @@
+/* Loaded only on the immersive demo. No shared page selectors are changed. */
+body[data-plan-b-page="immersive"] .iw-demo-screen {
+  container-type: inline-size;
+  --demo-accent: #b8f56a;
+  --demo-rgb: 184,245,106;
+}
+.iw-demo-screen .iw-mask {
+  background: linear-gradient(to bottom,rgba(42,49,54,.66) 0%,rgba(39,46,51,.60) 12%,rgba(35,42,47,.48) 25%,rgba(31,38,43,.30) 32%,rgba(27,34,39,.12) 38%,transparent 44%);
+}
+.iw-demo-screen .iw-demo-top {position:absolute;left:5cqw;right:5cqw;top:4.8cqw;pointer-events:none}
+.iw-demo-screen .iw-demo-metrics {display:grid;grid-template-columns:repeat(4,1fr);gap:1cqw}
+.iw-demo-screen .iw-demo-metric {border-left:1px solid var(--line);padding-left:2cqw}
+.iw-demo-screen .iw-demo-metric:first-child {border:0;padding-left:0}
+.iw-demo-screen .iw-demo-metric label {display:block;font-size:2.5cqw;color:#b4c5bc;margin-bottom:1.4cqw}
+.iw-demo-screen .iw-demo-metric strong {font:italic 5cqw "Archivo Black",sans-serif;letter-spacing:-.2cqw;font-variant-numeric:tabular-nums}
+.iw-demo-screen .iw-demo-metric small {font-size:1.9cqw;color:var(--muted);margin-left:.5cqw}
+.iw-demo-screen .iw-demo-progress {height:.6cqw;background:var(--line-soft);margin-top:3.6cqw;border-radius:999px;overflow:hidden}
+.iw-demo-screen .iw-demo-progress i {display:block;height:100%;width:33%;background:linear-gradient(90deg,var(--accent-green),#bcf877);box-shadow:0 0 12px #b8f56a;transition:width .35s}
+.iw-demo-screen .iw-demo-course {font-size:2.7cqw;margin-top:2.4cqw;color:#c8d8d3;letter-spacing:.3cqw}
+.iw-demo-screen .iw-demo-source {float:right;font-size:1.8cqw;letter-spacing:.05em;color:var(--muted)}
+.iw-demo-screen .iw-demo-feedback {position:absolute;left:4cqw;right:4cqw;top:14.5%;height:29cqw;display:grid;grid-template-columns:1fr 1fr;align-items:center;pointer-events:none}
+.iw-demo-screen .iw-demo-bodycard {height:100%;display:flex;align-items:center;justify-content:center}
+.iw-demo-screen .iw-demo-bodycard svg {width:14cqw;height:24.5cqw}
+.iw-demo-screen .iw-demo-bone {stroke:var(--text);stroke-width:7;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.iw-demo-screen .iw-demo-joint {fill:var(--text)}
+.iw-demo-screen .iw-demo-unrecognized {display:none;max-width:40cqw;padding:2cqw;font-size:3.8cqw;text-wrap:balance;line-height:1.55;text-align:center;font-weight:500}
+.iw-demo-screen .is-unknown svg {display:none}
+.iw-demo-screen .is-unknown .iw-demo-unrecognized {display:block}
+.iw-demo-screen .iw-demo-score {height:100%;padding:2cqw 5.5cqw 3.5cqw;display:flex;flex-direction:column;justify-content:center;gap:1.8cqw}
+.iw-demo-screen .iw-demo-number {height:17cqw;display:flex;align-items:center;justify-content:center}
+.iw-demo-screen .iw-demo-number b {font:italic 13.5cqw/1 "Archivo Black",sans-serif;letter-spacing:-.5cqw;text-shadow:0 0 24px rgba(var(--demo-rgb),.18)}
+.iw-demo-screen .iw-demo-gauge {position:relative;display:flex;gap:.55cqw;height:2.7cqw;min-height:2.7cqw;width:100%;--fill:95%}
+.iw-demo-screen .iw-demo-gauge i {flex:1;background:var(--line-soft);border-radius:.35cqw;transition:background .16s,box-shadow .16s}
+.iw-demo-screen .iw-demo-gauge i.lit {background:var(--demo-accent);box-shadow:0 0 6px rgba(var(--demo-rgb),.24)}
+.iw-demo-screen .iw-demo-gauge:after {content:"";position:absolute;inset:0 auto 0 0;width:var(--fill);border-radius:.35cqw;opacity:0;background:linear-gradient(105deg,transparent 38%,#ffffffb3 49%,transparent 60%);background-size:250% 100%}
+.iw-demo-screen .iw-demo-gauge.sweep:after {animation:iwDemoSweep 850ms 220ms ease-out}
+.iw-demo-screen .iw-demo-gauge.unknown {opacity:.18}
+.iw-demo-screen .iw-demo-gauge.unknown:after {display:none}
+.iw-demo-screen .iw-demo-results-area {position:absolute;left:4cqw;right:4cqw;bottom:158px;height:23cqw;overflow:hidden;pointer-events:none}
+.iw-demo-screen .iw-demo-result-list {position:absolute;inset:0;overflow:hidden;isolation:isolate}
+.iw-demo-screen .iw-demo-result-row {position:absolute;bottom:0;left:0;right:0;height:10cqw;padding:0 3cqw;display:flex;align-items:center;border-left:2px solid var(--result-color);border-radius:0 12px 12px 0;background:var(--panel);transform:translateY(calc(var(--index)*-12cqw));transition:transform .36s cubic-bezier(.22,.8,.3,1);backdrop-filter:blur(6px)}
+.iw-demo-screen .iw-demo-result-row strong {display:block;width:100%;min-width:0;white-space:nowrap;font-size:4cqw;line-height:1.25;font-weight:500}
+.iw-demo-screen .iw-demo-result-bubble {position:absolute;left:0;right:0;top:1cqw;height:20cqw;z-index:5;display:none;align-items:center;transform-origin:70% 82%;padding:3cqw;border:1px solid var(--result-color);border-left:3px solid var(--result-color);border-radius:18px;background:var(--panel-strong);box-shadow:var(--glow-soft);will-change:transform;backdrop-filter:blur(8px)}
+.iw-demo-screen .iw-demo-bubble-copy {width:100%;min-width:0}
+.iw-demo-screen .iw-demo-result-bubble h2 {font:600 4.5cqw/1.3 "Barlow",system-ui,sans-serif;white-space:nowrap}
+.iw-demo-screen .iw-demo-wash {position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;background:linear-gradient(90deg,rgba(var(--demo-rgb),.26),transparent 16%,transparent 83%,rgba(var(--demo-rgb),.28));box-shadow:inset 0 0 40px rgba(var(--demo-rgb),.17)}
+.iw-demo-screen .iw-demo-wash.pulse {animation:iwDemoPulse 1.8s ease-out}
+.iw-demo-screen .iw-demo-trigger {position:absolute;top:34%;left:8%;width:84%;bottom:calc(158px + 24cqw);min-height:44px;background:transparent;border:0;pointer-events:auto;cursor:pointer;border-radius:12px}
+.iw-demo-screen .iw-demo-trigger:focus-visible {outline:2px solid var(--cyan);outline-offset:-2px;background:#00d4ff08}
+.iw-demo-screen .iw-demo-trigger:disabled {cursor:default}
+.iw-demo-screen.iw-demo-paused .iw-demo-wash,
+.iw-demo-screen.iw-demo-paused .iw-demo-gauge:after {animation-play-state:paused}
+@keyframes iwDemoPulse {0%{opacity:0}20%{opacity:1}100%{opacity:0}}
+@keyframes iwDemoSweep {0%{opacity:0;background-position:180% 0}20%{opacity:.85}85%{opacity:.55}100%{opacity:0;background-position:-80% 0}}
+@media(prefers-reduced-motion:reduce) {
+  .iw-demo-screen .iw-demo-wash {display:none}
+  .iw-demo-screen [class^="iw-demo-"],.iw-demo-screen .iw-demo-gauge:after {animation:none!important;transition:none!important}
+}

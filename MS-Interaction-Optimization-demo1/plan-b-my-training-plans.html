@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · My Training Plans</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-my-training-plans.css" />
+</head>
+<body data-plan-b-page="my-training-plans">
+  <main class="device-shell" aria-label="My Training Plans">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="content my-plans-screen" id="myPlansScreen" aria-label="My Plans">
+      <div class="my-plans-app">
+        <header class="my-plans-header">
+          <h1>My Training Plans</h1>
+        </header>
+
+        <div class="my-plans-tabs" role="tablist" aria-label="Training plan categories">
+          <button class="my-plans-tab is-active" type="button" role="tab" aria-selected="true" data-tab="ongoing">In Progress</button>
+          <button class="my-plans-tab" type="button" role="tab" aria-selected="false" data-tab="history">History</button>
+        </div>
+
+        <section class="my-plans-results" aria-label="Plans list">
+          <div class="my-plans-list" id="myPlansList">
+            <!-- Plan cards will be rendered here via JS -->
+          </div>
+          <p class="my-plans-empty" id="myPlansEmpty" hidden>No plans found.</p>
+        </section>
+      </div>
+      <div class="action-dock" aria-label="Page actions">
+        <button class="action-dock-back-btn" type="button" aria-label="Go back to profile" onclick="window.location.href='plan-b-profile.html'">Back</button>
+      </div>
+    </section>
+  </main>
+  <script src="js/plan-b-verify.js" defer></script>
+  <script src="js/plan-b-my-training-plans.js" defer></script>
+  <script>
+    window.__DEV_BACKUP__ = { apiOrigin: 'http://127.0.0.1:37547' };
+  </script>
+  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · Training report</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive.css" />
+  <link rel="stylesheet" href="css/plan-b-pilates-report.css" />
+</head>
+<body data-plan-b-page="report">
+  <main class="device-shell" aria-label="Plan B home verification">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+<section class="training-report-screen active" id="trainingReportScreen" aria-label="Training report" aria-hidden="false">
+      <div class="tr-shell">
+        <div class="tr-top">
+          <span class="tr-kicker">Training Report</span>
+        </div>
+        <header class="tr-hero">
+          <div class="tr-avatar tr-avatar-initial" id="reportUserAvatar" data-user-avatar aria-hidden="true">A</div>
+          <div class="tr-greet">
+            <h2 id="reportCongratsTitle" data-user-congrats>Great Job, Alyona</h2>
+            <p id="reportSessionMeta">Session complete • Free training</p>
+          </div>
+        </header>
+        <section class="tr-grid" aria-label="Core session metrics">
+          <article class="tr-stat">
+            <label>Total Duration</label>
+            <strong><span id="reportDurationValue">00:00</span></strong>
+          </article>
+          <article class="tr-stat" id="reportCapacityStat">
+            <label>Capacity</label>
+            <strong><span id="reportCapacityValue">0.0</span><small>kg</small></strong>
+          </article>
+          <article class="tr-stat">
+            <label id="reportEnergyLabel">Output Energy</label>
+            <strong><span id="reportEnergyValue">0</span><small>kJ</small></strong>
+          </article>
+          <article class="tr-stat">
+            <label id="reportCaloriesLabel">Calories</label>
+            <strong><span id="reportCaloriesValue">0</span><small>kcal</small></strong>
+          </article>
+        </section>
+        <p class="tr-metrics-footnote">*Calorie data is calculated from exercise duration and resistance combined.</p>
+        <section class="tr-block" id="reportModeSetupBlock" aria-label="Mode settings">
+          <div class="tr-title-row">
+            <h3>Mode Setup</h3>
+            <span class="tr-note">View only</span>
+          </div>
+          <div class="tr-mode-group">
+            <span class="tr-mode-chip"><em>Mode</em><span id="reportModeLabel">Standard</span></span>
+            <span class="tr-mode-chip"><em>Equipment</em><span id="reportEquipmentLabel">Barbell</span></span>
+            <span class="tr-mode-chip"><em>Scene</em><span id="reportSceneLabel">Action Training</span></span>
+          </div>
+        </section>
+        <section class="tr-block" id="reportActionAnalysisBlock" aria-label="Action analysis" hidden>
+          <div class="tr-title-row">
+            <h3>Action Analysis</h3>
+            <span class="tr-note">AI supported</span>
+          </div>
+          <div class="tr-extra">
+            <article class="tr-extra-card tr-final-score tr-extra-card--score" id="reportFinalScoreWrap" hidden>
+              <label>Final Score</label>
+              <strong><span id="reportFinalScoreValue">93</span></strong>
+            </article>
+            <article class="tr-extra-card tr-final-score tr-extra-card--score">
+              <label>Consistency</label>
+              <strong id="reportConsistency">0%</strong>
+            </article>
+          </div>
+          <div class="tr-accuracy-dist" id="reportAccuracyDistBlock" hidden>
+            <div class="tr-accuracy-track">
+              <i class="tr-accuracy-seg tr-accuracy-better" id="reportAccuracyBetter"></i>
+              <i class="tr-accuracy-seg tr-accuracy-good" id="reportAccuracyGood"></i>
+              <i class="tr-accuracy-seg tr-accuracy-perfect" id="reportAccuracyPerfect"></i>
+            </div>
+            <div class="tr-accuracy-legend">
+              <span id="reportAccuracyBetterLabel">Better 0%</span>
+              <span id="reportAccuracyGoodLabel">Good 0%</span>
+              <span id="reportAccuracyPerfectLabel">Perfect 0%</span>
+            </div>
+          </div>
+          <p class="tr-coach-note" id="reportCoachNote">Keep a steady tempo and progress the resistance gradually.</p>
+        </section>
+        <section class="tr-block" id="reportActionCompletionBlock" aria-label="Action completion" hidden>
+          <div class="tr-title-row">
+            <h3>Action Completion</h3>
+            <span class="tr-note">Plan day detail</span>
+          </div>
+          <div class="tr-action-list" id="reportActionList"></div>
+        </section>
+        <section class="tr-block" id="reportStrengthPowerBlock" aria-label="Strength and power">
+          <div class="tr-title-row">
+            <h3>Strength &amp; Power</h3>
+            <span class="tr-note" id="reportIntensityRange">Max Resistance 120kg</span>
+          </div>
+          <div class="tr-intensity-wrap" id="reportIntensityBar"></div>
+          <div class="tr-intensity-legend" id="reportIntensityLegend"></div>
+          <p class="tr-intensity-legend-note" id="reportIntensityLegendNote"></p>
+          <div id="reportPowerCurveBlock" aria-label="Power and amplitude" hidden>
+            <div class="tr-title-row">
+              <h3>Power &amp; Amplitude</h3>
+              <span class="tr-note" id="reportPowerCurveMeta">Session</span>
+            </div>
+            <div class="tr-power-curve-tabs" id="reportPowerCurveTabs"></div>
+
+            <article class="tr-chart" data-chart="power">
+              <div class="tr-chart-head">
+                <span class="tr-chart-name">Power</span>
+                <span class="tr-chart-foot" id="reportPowerCurveFoot">Peak -- · Avg --</span>
+              </div>
+              <div class="tr-chart-viewport">
+                <button class="tr-chart-nav tr-chart-nav--prev" id="reportPowerNavPrev" type="button" aria-label="Scroll power chart left" hidden>
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="tr-chart-scroll" id="reportPowerScroll">
+                  <svg class="tr-chart-svg tr-chart-svg--power" id="reportPowerCurveSvg" viewBox="0 0 320 140" preserveAspectRatio="none" aria-label="Power over the session"></svg>
+                </div>
+                <button class="tr-chart-nav tr-chart-nav--next" id="reportPowerNavNext" type="button" aria-label="Scroll power chart right" hidden>
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+            </article>
+
+            <article class="tr-chart" data-chart="amplitude">
+              <div class="tr-chart-head">
+                <span class="tr-chart-name">Range of Motion</span>
+                <span class="tr-chart-foot" id="reportAmpFoot">Peak -- · Avg --</span>
+              </div>
+              <div class="tr-chart-viewport">
+                <button class="tr-chart-nav tr-chart-nav--prev" id="reportAmpNavPrev" type="button" aria-label="Scroll range of motion chart left" hidden>
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="tr-chart-scroll" id="reportAmpScroll">
+                  <svg class="tr-chart-svg tr-chart-svg--amp" id="reportAmpSvg" viewBox="0 0 320 140" preserveAspectRatio="none" aria-label="Range of motion over the session"></svg>
+                </div>
+                <button class="tr-chart-nav tr-chart-nav--next" id="reportAmpNavNext" type="button" aria-label="Scroll range of motion chart right" hidden>
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+        <footer class="tr-actions">
+          <button class="tr-btn tr-btn--ghost" id="reportAgainBtn" type="button">Train Again</button>
+          <button class="tr-btn tr-btn--primary" id="reportHomeBtn" type="button">Back Home</button>
+        </footer>
+      </div>
+    </section>
+  </main>
+  <script src="js/plan-b-user-store.js"></script>
+  <script src="js/data/explore-library.js"></script>
+  <script src="js/plan-b-verify.js" defer></script>
+  <script>
+    window.__DEV_BACKUP__ = { apiOrigin: 'http://127.0.0.1:37547' };
+  </script>
+  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · Ambient Light</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-ambient-light.css" />
+</head>
+<body data-plan-b-page="ambient-light-settings">
+  <main class="device-shell" aria-label="Ambient Light settings">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="settings-screen" aria-label="Ambient Light settings">
+      <div class="top-status-row">
+        <div class="status-pill">
+          <div class="status-time">
+            <span>10:26 AM</span>
+            <small>Dec 6, 2024</small>
+          </div>
+          <div class="status-icons">
+            <span class="status-chip">Wi</span>
+            <span class="status-chip">85%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-header">
+        <h1 class="settings-title">Ambient Light</h1>
+      </div>
+
+      <div class="settings-content">
+        <article class="setting-card card-power">
+          <div class="setting-row">
+            <div>
+              <h2 class="card-title">Ambient Light</h2>
+              <p class="card-subtitle">Turn the ambient light on or off.</p>
+            </div>
+            <button class="toggle-btn" id="ambientPowerToggle" type="button" role="switch" aria-checked="false" aria-label="Ambient light switch">
+              <span class="toggle-knob"></span>
+            </button>
+          </div>
+        </article>
+
+        <div id="featureGroup">
+          <article class="setting-card">
+            <div class="setting-row">
+              <div>
+                <h2 class="card-title">Color</h2>
+                <p class="card-subtitle">Choose a preset color.</p>
+              </div>
+              <span class="badge">7 presets</span>
+            </div>
+
+            <div class="preset-grid" id="presetGrid">
+              <button class="preset-chip" type="button" data-color="#ffffff" data-name="White"><span class="chip-dot" style="--chip-color:#ffffff;"></span>White</button>
+              <button class="preset-chip" type="button" data-color="#3b82f6" data-name="Blue"><span class="chip-dot" style="--chip-color:#3b82f6;"></span>Blue</button>
+              <button class="preset-chip" type="button" data-color="#8b5cf6" data-name="Purple"><span class="chip-dot" style="--chip-color:#8b5cf6;"></span>Purple</button>
+              <button class="preset-chip" type="button" data-color="#ec4899" data-name="Pink"><span class="chip-dot" style="--chip-color:#ec4899;"></span>Pink</button>
+              <button class="preset-chip" type="button" data-color="#ef4444" data-name="Red"><span class="chip-dot" style="--chip-color:#ef4444;"></span>Red</button>
+              <button class="preset-chip" type="button" data-color="#f97316" data-name="Orange"><span class="chip-dot" style="--chip-color:#f97316;"></span>Orange</button>
+              <button class="preset-chip" type="button" data-color="#22c55e" data-name="Green"><span class="chip-dot" style="--chip-color:#22c55e;"></span>Green</button>
+            </div>
+          </article>
+
+          <article class="setting-card">
+            <h2 class="card-title brightness-card-title">Brightness <span class="brightness-inline-value"><span id="brightnessValue">60</span>%</span></h2>
+
+            <div class="brightness-manual-block">
+              <h3 class="row-title">Manual brightness</h3>
+              <div class="brightness-slider-block">
+                <input id="brightnessSlider" class="range-slider" type="range" min="0" max="100" step="1" value="60" aria-label="Manual brightness" />
+                <div class="range-endpoints" aria-hidden="true">
+                  <span>0%</span>
+                  <span>100%</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="setting-card">
+            <div class="setting-row">
+              <div>
+                <h2 class="card-title">Mode</h2>
+                <p class="card-subtitle">Choose steady or breathing mode.</p>
+              </div>
+            </div>
+            <div class="segmented" id="modeSegment">
+              <button class="segment-btn is-active" type="button" data-mode="steady">Steady</button>
+              <button class="segment-btn" type="button" data-mode="breathing">Breathing</button>
+            </div>
+
+            <div id="breathingSpeedGroup" class="breathing-group is-hidden">
+              <label class="field-label">Breathing speed</label>
+              <div class="segmented">
+                <button class="segment-btn is-active" type="button" data-speed="medium">Medium (5s)</button>
+                <button class="segment-btn" type="button" data-speed="slow">Slow (10s)</button>
+                <button class="segment-btn" type="button" data-speed="fast">Fast (2s)</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="setting-card">
+            <div class="setting-row">
+              <div>
+                <h2 class="card-title">Training sync</h2>
+                <p class="card-subtitle">Lights respond to your effort or range of motion.</p>
+              </div>
+              <button class="toggle-btn" id="trainingSyncToggle" type="button" role="switch" aria-checked="false" aria-label="Training sync">
+                <span class="toggle-knob"></span>
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div class="ambient-footer-actions">
+          <div class="reset-defaults-wrap">
+            <button class="reset-defaults-btn" type="button" id="resetDefaultsBtn">
+              <span class="reset-defaults-btn-label">Restore defaults</span>
+              <span class="reset-defaults-btn-desc">Reset all ambient light options to factory defaults.</span>
+            </button>
+          </div>
+          <div class="action-dock ambient-action-dock" aria-label="Page actions">
+            <button class="action-dock-back-btn" type="button" onclick="window.location.href='plan-b-device-settings.html'" aria-label="Back to device settings">Back</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="training-modal" id="resetDefaultsModal" aria-hidden="true">
+      <div class="modal-panel reset-modal-panel" role="dialog" aria-modal="true" aria-labelledby="resetModalTitle">
+        <div class="modal-head">
+          <h3 id="resetModalTitle">Restore defaults</h3>
+          <button class="close-btn" id="closeResetModalBtn" type="button" aria-label="Close">✕</button>
+        </div>
+        <p class="reset-modal-copy">Reset all ambient light settings to factory defaults? Your current settings and switch states will be cleared.</p>
+        <div class="reset-modal-actions">
+          <button class="secondary-btn reset-modal-cancel" type="button" id="cancelResetBtn">Cancel</button>
+          <button class="resume-btn reset-modal-confirm" type="button" id="confirmResetBtn">Restore</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="js/plan-b-ambient-light-settings.js"></script>
+  <script>
+    window.__DEV_BACKUP__ = { apiOrigin: 'http://127.0.0.1:37547' };
+  </script>
+  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+</body>
+</html>

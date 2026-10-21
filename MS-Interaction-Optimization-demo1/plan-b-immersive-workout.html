@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan B · Immersive workout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/plan-b-base.css?v=1080x1920" />
+  <link rel="stylesheet" href="css/plan-b-modal-detail.css" />
+  <link rel="stylesheet" href="css/plan-b-profile.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive.css" />
+  <link rel="stylesheet" href="css/plan-b-pilates-report.css" />
+  <link rel="stylesheet" href="css/plan-b-immersive-demo.css" />
+  <style id="iw-entry-page-overrides">
+    /* Twice the v7-derived gray scrim opacity, clamped to 100%. */
+    body[data-plan-b-page="immersive"] .iw-demo-screen .iw-mask {
+      background: linear-gradient(to bottom,
+        rgba(42,49,54,1) 0%, rgba(39,46,51,1) 12%,
+        rgba(35,42,47,.96) 25%, rgba(31,38,43,.60) 32%,
+        rgba(27,34,39,.24) 38%, transparent 44%);
+    }
+  </style>
+</head>
+<body data-plan-b-page="immersive">
+  <main class="device-shell" aria-label="Plan B home verification">
+    <div class="particle-layer" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+<section class="immersive-workout-screen active iw-demo-screen" id="immersiveWorkoutScreen" aria-label="Immersive workout control" aria-hidden="false">
+      <video id="iwVideo" class="iw-video" preload="none" playsinline muted poster="assets/strength-training-frame.png" aria-label="Static training demonstration"><source id="iwVideoSource" type="video/mp4" /></video>
+      <div class="iw-mask"></div><div class="iw-demo-wash" id="iwDemo-wash" aria-hidden="true"></div>
+      <div class="iw-ai-ready-overlay is-visible" id="iwAiReadyOverlay" aria-hidden="false">
+        <div class="iw-ai-ready-panel" id="iwAiReadyPanel" data-recog-state="scanning">
+          <header class="iw-recog-topbar">
+            <h3 class="iw-recog-title">AI 识别</h3>
+          </header>
+          <div class="iw-recog-body">
+            <div class="iw-recog-zone" id="iwRecogZone">
+              <p class="iw-recog-zone-alert" id="iwRecogAlert" hidden aria-live="polite">请确保相机镜头未被遮挡或环境光不存在过暗或过曝情况。</p>
+              <div class="iw-recog-zone-frame" id="iwRecogZoneFrame">
+                <svg class="iw-recog-figure" viewBox="0 0 90 120" fill="none" aria-hidden="true">
+                  <circle cx="45" cy="23" r="10"></circle>
+                  <path d="M45 36v30M27 60h36M32 108l13-24l13 24M36 50l-9 26M54 50l9 26"></path>
+                </svg>
+                <span class="iw-recog-complete-badge" id="iwRecogCompleteBadge" hidden aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 12.5l2.5 2.5L16 9"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <p class="iw-recog-hint" id="iwRecogHint">请面向屏幕站立确保相机能够有效识别。</p>
+            <p class="iw-recog-status" id="iwRecogStatus" aria-live="polite">识别中…</p>
+          </div>
+        </div>
+      </div>
+      <div class="iw-overlay">
+        <header class="iw-demo-top"><div class="iw-demo-metrics"><div class="iw-demo-metric"><label>时长</label><strong id="iwDemo-time">02:12</strong></div><div class="iw-demo-metric"><label>容量</label><strong id="iwDemo-volume">81.0</strong><small>kg</small></div><div class="iw-demo-metric"><label>输出能量</label><strong id="iwDemo-energy">2.7</strong><small>kJ</small></div><div class="iw-demo-metric"><label>卡路里</label><strong id="iwDemo-calories">14</strong><small>kcal</small></div></div><div class="iw-demo-progress"><i id="iwDemo-progress"></i></div><div class="iw-demo-course"><span id="iwActionTitle">站姿拉力训练</span></div></header>
+<div class="iw-demo-feedback"><div class="iw-demo-bodycard" id="iwDemo-bodycard"><svg viewBox="0 0 100 180" role="img" aria-label="动作火柴人"><g id="iwDemo-skeleton"><circle class="iw-demo-joint" cx="50" cy="20" r="10"/><ellipse class="iw-demo-joint" cx="50" cy="64" rx="9" ry="23"/><g><path class="iw-demo-bone" d="M37 46 L24 57 L15 42"/><path class="iw-demo-bone" d="M63 46 L77 57 L86 42"/></g><path class="iw-demo-bone" d="M42 93 L37 126 L31 166"/><path class="iw-demo-bone" d="M58 93 L63 126 L68 166"/></g></svg><p class="iw-demo-unrecognized">无法识别完整动作</p></div><div class="iw-demo-score"><div class="iw-demo-number"><b id="iwDemo-score">96</b></div><div class="iw-demo-gauge" id="iwDemo-gauge" aria-hidden="true"></div></div></div>
+<section class="iw-demo-results-area" aria-label="动作反馈"><div class="iw-demo-result-list" id="iwDemo-result-list" role="log" aria-label="已结束动作的反馈"></div><div class="iw-demo-result-bubble" id="iwDemo-result-bubble" aria-hidden="true"><div class="iw-demo-bubble-copy"><h2 id="iwDemo-bubble-title"></h2></div></div></section>
+<button class="iw-demo-trigger" id="iwDemo-trigger" type="button" aria-label="Show a random simulated completed-action result"></button>
+        <section class="iw-drawer" id="iwDrawer">
+          <div class="iw-handle" id="iwDrawerHandle">
+            <div class="iw-summary">
+              <div>
+                <span>Resistance: <b id="iwSummaryMode">Standard</b></span>
+                <span><strong id="iwSummaryWeight">50.0</strong>kg</span>
+              </div>
+              <div class="iw-chip-row">
+                <span class="iw-chip iw-chip--mode" id="iwModeChip">Standard</span>
+                <span class="iw-chip" id="iwMetaChip">Power stable</span>
+                <button class="iw-equip-btn active" type="button" data-equipment="barbell" id="iwEquipBarbell" aria-label="Barbell mode">
+                  <svg viewBox="0 0 24 24"><path d="M3 9v6M6 7v10M9 10v4M15 10v4M18 7v10M21 9v6M9 12h6"></path></svg>
+                  <span>Barbell</span>
+                </button>
+                <button class="iw-equip-btn" type="button" data-equipment="other" id="iwEquipOther" aria-label="Other mode">
+                  <svg viewBox="0 0 24 24"><path d="M6 12h12M8 8l-2 4 2 4M16 8l2 4-2 4"></path></svg>
+                  <span>Other</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="iw-content">
+            <div class="iw-section-title">Resistance mode</div>
+            <div class="iw-mode-group" id="iwModeGroup">
+              <button class="iw-mode-btn active" data-mode="standard" type="button">Standard</button>
+              <button class="iw-mode-btn" data-mode="spring" type="button">Spring</button>
+              <button class="iw-mode-btn" data-mode="eccentric" type="button">Eccentric</button>
+              <button class="iw-mode-btn" data-mode="isokinetic" type="button">Isokinetic</button>
+            </div>
+            <div class="iw-section-title">Resistance</div>
+            <div class="iw-weight-row">
+              <button class="iw-step-btn" id="iwDecreaseBtn" type="button">−</button>
+              <div class="iw-dial-container">
+                <svg class="iw-dial-svg" viewBox="0 0 160 160">
+                  <defs>
+                    <linearGradient id="iwDialGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#00D4FF"/>
+                      <stop offset="100%" stop-color="#007AFF"/>
+                    </linearGradient>
+                  </defs>
+                  <circle cx="80" cy="80" r="70" class="iw-dial-ticks"></circle>
+                  <circle cx="80" cy="80" r="54" class="iw-dial-track"></circle>
+                  <circle cx="80" cy="80" r="54" class="iw-dial-progress" id="iwDialProgress"></circle>
+                </svg>
+                <div class="iw-dial-content">
+                  <div class="iw-dial-value" id="iwWeightValue">50.0</div>
+                  <div class="iw-dial-unit">kg</div>
+                </div>
+              </div>
+              <button class="iw-step-btn" id="iwIncreaseBtn" type="button">+</button>
+            </div>
+            <div class="iw-step-note">Step: 0.5 kg</div>
+            <div class="spring-bar iw-spring-bar" id="iwSpringBar" hidden aria-label="Resistance spring indicator">
+              <div class="spring-bar-coil" id="iwSpringCoil"></div>
+              <span class="spring-bar-value" id="iwSpringBarValue">5 kg</span>
+            </div>
+            <div class="iw-param-panel" id="iwParamPanel">
+              <div class="iw-param-head">
+                <span id="iwParamLabel">Spring level</span>
+                <strong id="iwParamDisplay">Level 1</strong>
+              </div>
+              <input class="iw-slider" id="iwParamSlider" type="range" min="1" max="10" step="1" value="1" />
+              <div class="iw-param-tip" id="iwParamTip"></div>
+              <div class="iw-param-submit" id="iwParamSubmit"></div>
+            </div>
+            <div class="iw-chart-card">
+              <div class="iw-chart-header">
+                <div class="iw-chart-tabs" id="iwChartTabs">
+                  <button class="iw-chart-tab active" data-tab="rom" type="button">ROM</button>
+                  <button class="iw-chart-tab" data-tab="power" type="button">Power</button>
+                </div>
+                <div class="iw-chart-legend" id="iwChartLegend">
+                  <div class="iw-legend-item">
+                    <span class="iw-legend-color iw-legend-range" aria-hidden="true"></span>
+                    <span>Range</span>
+                  </div>
+                  <div class="iw-legend-item">
+                    <span class="iw-legend-color iw-legend-power" aria-hidden="true"></span>
+                    <span>Power</span>
+                  </div>
+                </div>
+              </div>
+              <canvas id="iwChartCanvas" width="1000" height="320" aria-label="Chart"></canvas>
+            </div>
+          </div>
+        </section>
+        <div class="action-dock action-dock--immersive action-dock--spread" aria-label="Workout controls">
+          <div class="iw-ctrls">
+            <button class="iw-btn" id="iwFlipBtn" type="button">Flip</button>
+            <button class="iw-btn" id="iwPlayBtn" type="button">Pause</button>
+            <button class="iw-btn iw-btn--end" id="iwEndBtn" type="button">End</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="js/plan-b-user-store.js"></script>
+  <script src="js/data/explore-library.js"></script>
+  <script src="js/plan-b-immersive-demo.js" defer></script>
+  <script src="js/plan-b-verify.js" defer></script>
+  <script>
+    window.__DEV_BACKUP__ = { apiOrigin: 'http://127.0.0.1:37547' };
+  </script>
+  <script src="http://127.0.0.1:37547/widget.js" defer></script>
+  <script>
+    // Page-only adapter: reuse the original recognition presentation and timing.
+    // This remains a simulated entry sequence, not camera acquisition.
+    document.addEventListener("DOMContentLoaded", () => {
+      const overlay = document.getElementById("iwAiReadyOverlay");
+      const panel = document.getElementById("iwAiReadyPanel");
+      const controls = document.querySelector(".iw-overlay");
+      const demo = window.PlanBImmersiveDemo;
+      if (!overlay || !panel || !demo?.active) return;
+
+      let timer = 0;
+      let finished = false;
+      const resumeAfterEntry = document.getElementById("iwPlayBtn").textContent === "Pause";
+      if (resumeAfterEntry) demo.togglePlaying();
+      controls.inert = true;
+      overlay.classList.add("is-visible");
+      overlay.setAttribute("aria-hidden", "false");
+      overlay.setAttribute("role", "dialog");
+      overlay.setAttribute("aria-modal", "true");
+      overlay.setAttribute("aria-labelledby", "iwEntryTitle");
+      overlay.querySelector(".iw-recog-title").id = "iwEntryTitle";
+      overlay.tabIndex = -1;
+      overlay.focus({ preventScroll: true });
+      clearIwRecognitionFlow();
+
+      function finishEntry() {
+        if (finished) return;
+        finished = true;
+        window.clearTimeout(timer);
+        panel.classList.remove("is-scanning");
+        overlay.classList.remove("is-visible");
+        overlay.setAttribute("aria-hidden", "true");
+        controls.inert = false;
+        if (resumeAfterEntry && demo.active) demo.togglePlaying();
+        document.getElementById("iwPlayBtn").focus({ preventScroll: true });
+      }
+      function showStep(index) {
+        const state = IW_RECOG_CYCLE[index];
+        setRecogState(state);
+        panel.classList.toggle("is-scanning", state === "scanning");
+        const dwell = state === "scanning"
+          ? IW_AI_GUIDANCE_DWELL_MS + IW_AI_SCAN_MS
+          : state === "success" ? IW_AI_SUCCESS_DWELL_MS : IW_RECOG_FAILURE_DWELL_MS;
+        timer = window.setTimeout(() => {
+          if (state === "success") finishEntry();
+          else showStep(index + 1);
+        }, dwell);
+      }
+      showStep(0);
+      window.addEventListener("pagehide", () => {
+        window.clearTimeout(timer);
+      }, { once: true });
+      // A restored back/forward cache page must not retain an inert overlay.
+      window.addEventListener("pageshow", event => {
+        if (event.persisted && !finished) finishEntry();
+      });
+    }, { once: true });
+  </script>
+
+</body>
+</html>
